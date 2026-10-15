@@ -1,830 +1,518 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Дом Лучшей Еды — Премиальный Ресторан</title>
-    <!-- Tailwind CSS CDN -->
-    <script src="https://cdn.tailwindcss.com"></script>
-    <!-- Font Awesome Icons -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <!-- Google Fonts: Playfair Display for headers & Montserrat for body -->
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,600;0,700;1,400&display=swap" rel="stylesheet">
-    
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    colors: {
-                        brand: {
-                            orange: '#e8741e',
-                            darkOrange: '#d06010',
-                            wood: '#110b07',
-                            cardBg: '#ffffff',
-                            accent: '#bc6c25'
-                        }
-                    },
-                    fontFamily: {
-                        serif: ['"Playfair Display"', 'serif'],
-                        sans: ['"Montserrat"', 'sans-serif'],
-                    }
-                }
-            }
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ValMari — Учебный центр эстетической косметологии</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            brandGreen: '#52B030',
+            brandGreenHover: '#439327',
+            brandLightBg: '#E9F7E8',
+            brandPurple: '#4A3B9F',
+            brandPurpleHover: '#3A2E80',
+            brandTeal: '#00B09B'
+          }
         }
-    </script>
-
-    <style>
-        body {
-            font-family: 'Montserrat', sans-serif;
-            overflow-x: hidden;
-            scroll-behavior: smooth;
-        }
-
-        .bg-wood-texture {
-            background-color: #120c08;
-            background-image: 
-                radial-gradient(circle at 50% 30%, rgba(232, 116, 30, 0.15), transparent 70%),
-                linear-gradient(to bottom, rgba(18, 12, 8, 0.85), rgba(18, 12, 8, 0.98)),
-                url('https://images.unsplash.com/photo-1546484475-7f7bd55792da?auto=format&fit=crop&w=1920&q=80');
-            background-size: cover;
-            background-position: center;
-        }
-
-        .bg-brick-texture {
-            background-color: #1a0f0a;
-            background-image: 
-                linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)),
-                url('https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&w=1920&q=80');
-            background-size: cover;
-            background-position: center;
-            background-attachment: fixed;
-        }
-
-        .bg-promo-banner {
-            background-image: 
-                linear-gradient(to right, rgba(0,0,0,0.85) 40%, rgba(0,0,0,0.4)),
-                url('https://images.unsplash.com/photo-1504674900247-0877df9cc836?auto=format&fit=crop&w=1920&q=80');
-            background-size: cover;
-            background-position: center;
-        }
-
-        .bg-footer-interior {
-            background-image: 
-                linear-gradient(to bottom, rgba(0,0,0,0.6), rgba(0,0,0,0.85)),
-                url('https://images.unsplash.com/photo-1550966871-3ed3cdb5ed0c?auto=format&fit=crop&w=1920&q=80');
-            background-size: cover;
-            background-position: center;
-        }
-
-        /* Custom price tag overlay circle */
-        .price-badge {
-            box-shadow: 0 4px 15px rgba(232, 116, 30, 0.4);
-        }
-
-        /* Dotted leader for menu items */
-        .dotted-line {
-            border-bottom: 2px dotted #cccccc;
-            flex-grow: 1;
-            margin: 0 12px;
-            height: 1em;
-        }
-
-        /* Floating image subtle animation */
-        @keyframes floatSlow {
-            0%, 100% { transform: translateY(0px) rotate(0deg); }
-            50% { transform: translateY(-10px) rotate(2deg); }
-        }
-        .animate-float {
-            animation: floatSlow 6s ease-in-out infinite;
-        }
-
-        /* Modal display animation */
-        .modal-active {
-            display: flex !important;
-            animation: fadeIn 0.3s ease-out;
-        }
-        @keyframes fadeIn {
-            from { opacity: 0; transform: scale(0.95); }
-            to { opacity: 1; transform: scale(1); }
-        }
-    </style>
+      }
+    }
+  </script>
+  <style>
+    html { scroll-behavior: smooth; }
+    .card-shadow { box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.08); }
+    .number-bg { font-size: 8rem; line-height: 1; opacity: 0.15; position: absolute; right: 1rem; bottom: -0.5rem; font-weight: 800; }
+  </style>
 </head>
-<body class="bg-gray-50 text-gray-800">
+<body class="font-sans text-gray-800 bg-white">
 
-    <!-- Header / Navbar Section -->
-    <header class="bg-wood-texture pt-6 pb-28 text-white relative z-20 border-b border-amber-900/30">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex items-center justify-between h-20">
-                
-                <!-- Logo -->
-                <a href="#" class="flex items-center space-x-3 group">
-                    <div class="relative w-10 h-10 flex items-center justify-center">
-                        <div class="absolute w-7 h-7 border-2 border-brand-orange rotate-45 transition-transform group-hover:rotate-90 duration-500"></div>
-                        <div class="absolute w-7 h-7 border-2 border-amber-400 rotate-12 transition-transform group-hover:-rotate-45 duration-500"></div>
-                    </div>
-                </a>
-
-                <!-- Desktop Navigation Links -->
-                <nav class="hidden md:flex items-center space-x-8 text-xs font-semibold tracking-widest uppercase">
-                    <a href="#hero" class="text-brand-orange transition-colors">ГЛАВНАЯ</a>
-                    <a href="#our-menu" class="hover:text-brand-orange transition-colors">МЕНЮ</a>
-                    <a href="#about" class="hover:text-brand-orange transition-colors">О НАС</a>
-                    <a href="#reservation" class="hover:text-brand-orange transition-colors">БРОНЬ</a>
-                    <button onclick="openCartModal()" class="relative hover:text-brand-orange transition-colors text-sm">
-                        <i class="fa-solid font-bold fa-cart-shopping"></i>
-                        <span id="cart-count" class="absolute -top-2 -right-3 bg-brand-orange text-white text-[10px] w-4 h-4 rounded-full flex items-center justify-center font-bold">0</span>
-                    </button>
-                </nav>
-
-                <!-- Phone and Booking Button -->
-                <div class="hidden lg:flex items-center space-x-6">
-                    <div class="flex items-center space-x-3 text-right">
-                        <div class="p-2 border border-amber-500/30 rounded-full text-brand-orange">
-                            <i class="fa-solid fa-phone text-sm"></i>
-                        </div>
-                        <div>
-                            <a href="tel:+9998887654" class="font-bold text-sm hover:text-brand-orange transition-colors tracking-wider">+999-888-76-54</a>
-                            <p class="text-[10px] text-gray-400">Свяжитесь с нами для бронирования</p>
-                        </div>
-                    </div>
-                    <button onclick="openBookingModal()" class="bg-brand-orange hover:bg-brand-darkOrange text-white text-xs font-bold uppercase tracking-wider px-6 py-3.5 rounded shadow-lg transition-all transform hover:-translate-y-0.5 active:translate-y-0">
-                        ЗАКАЗ СТОЛИКА
-                    </button>
-                </div>
-
-                <!-- Mobile Hamburger Button -->
-                <div class="md:hidden flex items-center space-x-4">
-                    <button onclick="openCartModal()" class="relative text-white text-lg">
-                        <i class="fa-solid fa-cart-shopping"></i>
-                        <span class="absolute -top-2 -right-2 bg-brand-orange text-white text-[10px] w-4 h-4 rounded-full flex items-center justify-center font-bold">0</span>
-                    </button>
-                    <button id="mobile-menu-btn" class="text-gray-300 hover:text-white text-2xl focus:outline-none">
-                        <i class="fa-solid fa-bars"></i>
-                    </button>
-                </div>
-            </div>
-
-            <!-- Mobile Navigation Menu -->
-            <div id="mobile-menu" class="hidden md:hidden bg-zinc-900 border-t border-amber-900/40 mt-4 rounded-lg p-5 space-y-4 text-center">
-                <a href="#hero" class="block text-brand-orange font-medium py-1">ГЛАВНАЯ</a>
-                <a href="#our-menu" class="block text-gray-200 hover:text-brand-orange font-medium py-1">МЕНЮ</a>
-                <a href="#about" class="block text-gray-200 hover:text-brand-orange font-medium py-1">О НАС</a>
-                <a href="#reservation" class="block text-gray-200 hover:text-brand-orange font-medium py-1">БРОНЬ</a>
-                <div class="pt-2 border-t border-zinc-800">
-                    <p class="font-bold text-sm text-brand-orange">+999-888-76-54</p>
-                    <button onclick="openBookingModal()" class="w-full mt-3 bg-brand-orange hover:bg-brand-darkOrange text-white text-xs font-bold py-3 rounded uppercase">
-                        ЗАКАЗ СТОЛИКА
-                    </button>
-                </div>
-            </div>
+  <!-- ШАПКА И НАВИГАЦИЯ -->
+  <header class="border-b border-gray-100 bg-white sticky top-0 z-40 shadow-sm">
+    <div class="max-w-7xl mx-auto px-4 py-3 flex items-center justify-between">
+      
+      <!-- Логотип -->
+      <a href="#" class="flex items-center gap-3">
+        <div class="w-12 h-12 rounded-full bg-brandLightBg border-2 border-brandGreen flex items-center justify-center font-bold text-brandGreen text-sm">
+          ValMari
         </div>
+        <div class="text-xs text-gray-600 font-medium hidden sm:block">
+          Учебный центр<br><span class="font-normal text-gray-400">эстетической косметологии</span>
+        </div>
+      </a>
 
-        <!-- Hero Banner Content -->
-        <div id="hero" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-12 pb-24 relative">
+      <!-- Контакты и Язык -->
+      <div class="flex items-center gap-6">
+        <a href="tel:0800508622" class="flex items-center gap-2 text-gray-800 font-bold hover:text-brandGreen transition">
+          <i class="fa-solid fa-phone text-brandGreen text-lg"></i>
+          <span class="text-sm md:text-base">0 (800) 508-622</span>
+        </a>
+        <div class="hidden md:flex items-center gap-3 text-lg">
+          <a href="#" class="w-8 h-8 rounded-full bg-brandGreen text-white flex items-center justify-center hover:bg-brandGreenHover transition"><i class="fa-brands fa-facebook-f text-sm"></i></a>
+          <a href="#" class="w-8 h-8 rounded-full bg-brandGreen text-white flex items-center justify-center hover:bg-brandGreenHover transition"><i class="fa-brands fa-instagram text-sm"></i></a>
+        </div>
+        <div class="flex items-center gap-1 cursor-pointer text-sm border border-gray-200 rounded px-2 py-1">
+          <span class="w-5 h-3 bg-blue-600 block relative overflow-hidden rounded-sm"><span class="bg-red-600 h-1/3 block absolute bottom-0 w-full"></span><span class="bg-white h-1/3 block absolute top-0 w-full"></span></span>
+          <i class="fa-solid fa-chevron-down text-xs text-gray-400 ml-1"></i>
+        </div>
+        
+        <!-- Кнопка мобильного меню -->
+        <button id="mobileMenuBtn" class="lg:hidden text-2xl text-gray-700">
+          <i class="fa-solid fa-bars"></i>
+        </button>
+      </div>
+    </div>
+
+    <!-- МЕНЮ НАВИГАЦИИ -->
+    <nav id="mainNav" class="hidden lg:block border-t border-gray-100 bg-white">
+      <div class="max-w-7xl mx-auto px-4 flex flex-col lg:flex-row items-center justify-between text-sm py-2 lg:py-0 font-medium text-gray-600 gap-4 lg:gap-0">
+        <a href="#courses" class="py-3 hover:text-brandGreen border-b-2 border-transparent hover:border-brandGreen transition">Курсы обучения</a>
+        <a href="#webinars" class="py-3 hover:text-brandGreen border-b-2 border-transparent hover:border-brandGreen transition">Вебинары</a>
+        <a href="#videos" class="py-3 hover:text-brandGreen border-b-2 border-transparent hover:border-brandGreen transition">Видео-уроки</a>
+        <a href="#about" class="py-3 hover:text-brandGreen border-b-2 border-transparent hover:border-brandGreen transition">Блог</a>
+        <a href="#about" class="py-3 hover:text-brandGreen border-b-2 border-transparent hover:border-brandGreen transition">О нас</a>
+        <a href="#courses" class="py-3 hover:text-brandGreen border-b-2 border-transparent hover:border-brandGreen transition">Прайс</a>
+        <a href="#masterclasses" class="py-3 hover:text-brandGreen border-b-2 border-transparent hover:border-brandGreen transition">Расписание</a>
+        <a href="#promos" class="py-3 hover:text-brandGreen border-b-2 border-transparent hover:border-brandGreen transition">Акции</a>
+        <a href="#callback" class="py-3 hover:text-brandGreen border-b-2 border-transparent hover:border-brandGreen transition">Магазин</a>
+      </div>
+    </nav>
+  </header>
+
+  <!-- ГЛАВНЫЙ ЭКРАН (HERO) -->
+  <section id="webinars" class="bg-brandLightBg relative overflow-hidden py-12 md:py-20">
+    <div class="max-w-7xl mx-auto px-4 grid grid-cols-1 lg:grid-cols-2 items-center gap-8">
+      <div>
+        <p class="text-gray-700 font-medium mb-2 text-base md:text-lg">Бесплатный вебинар</p>
+        <h1 class="text-3xl md:text-5xl lg:text-6xl font-extrabold text-brandGreen tracking-tight leading-tight mb-4">
+          ПРОФЕССИЯ<br>КОСМЕТОЛОГ
+        </h1>
+        <p class="text-gray-600 text-base md:text-lg mb-8 max-w-lg">
+          Приглашаем на бесплатный вебинар для профессиональных косметологов и интересующихся этой профессией
+        </p>
+        <div class="flex flex-wrap gap-4">
+          <button onclick="openModal('Бесплатный вебинар ПРОФЕССИЯ КОСМЕТОЛОГ')" class="bg-brandGreen hover:bg-brandGreenHover text-white font-semibold px-8 py-4 rounded shadow-lg transition">
+            Зарегистрироваться
+          </button>
+          <a href="#about" class="border border-brandGreen text-brandGreen font-semibold px-8 py-4 rounded hover:bg-white transition flex items-center justify-center">
+            Узнать подробнее
+          </a>
+        </div>
+      </div>
+      <div class="relative flex justify-center lg:justify-end">
+        <img src="images/hero-doctors.jpg" alt="Косметологи ValMari" class="rounded-2xl object-cover shadow-xl max-h-[450px] w-full lg:w-4/5">
+      </div>
+    </div>
+  </section>
+
+  <!-- СТАТИСТИКА -->
+  <section class="py-10 bg-white border-b border-gray-100">
+    <div class="max-w-7xl mx-auto px-4 grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
+      <div>
+        <div class="text-3xl md:text-4xl font-extrabold text-brandGreen">4000+</div>
+        <div class="text-xs md:text-sm text-gray-500 mt-1">Сертификатов мы выдали</div>
+      </div>
+      <div>
+        <div class="text-3xl md:text-4xl font-extrabold text-brandGreen">3500+</div>
+        <div class="text-xs md:text-sm text-gray-500 mt-1">Моделей в нашей базе</div>
+      </div>
+      <div>
+        <div class="text-3xl md:text-4xl font-extrabold text-brandGreen">1500+</div>
+        <div class="text-xs md:text-sm text-gray-500 mt-1">Специалистов мы обучили</div>
+      </div>
+      <div>
+        <div class="text-3xl md:text-4xl font-extrabold text-brandGreen">5500+</div>
+        <div class="text-xs md:text-sm text-gray-500 mt-1">Довольных клиентов</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- КУРСЫ ОБУЧЕНИЯ -->
+  <section id="courses" class="py-16 bg-white">
+    <div class="max-w-7xl mx-auto px-4">
+      <h2 class="text-2xl md:text-3xl font-bold text-center text-gray-800 mb-12">Курсы обучения</h2>
+      
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+        <!-- Карточка 1 -->
+        <div class="border border-gray-100 rounded-2xl overflow-hidden card-shadow flex flex-col justify-between bg-white">
+          <div class="p-6">
+            <div class="flex justify-between items-center mb-4">
+              <span class="text-xs text-gray-400 font-medium">Курс для медиков</span>
+              <i class="fa-solid fa-dove text-brandGreen text-lg"></i>
+            </div>
+            <h3 class="text-xl font-bold text-brandPurple mb-3">Канюльные техники</h3>
+            <span class="inline-block bg-brandPurple text-white text-xs font-semibold px-4 py-1 rounded-full mb-4">Оффлайн</span>
+            <div class="text-sm font-semibold text-gray-700 mb-4">1 - 4 мая</div>
             
-            <!-- Decorative Floating Foods Imagery (Desktop) -->
-            <img src="https://images.unsplash.com/photo-1539136788836-5699e78bfc75?auto=format&fit=crop&w=200&q=80" alt="Sushi" class="hidden xl:block absolute top-0 right-10 w-44 h-44 object-contain animate-float drop-shadow-2xl z-10 pointer-events-none">
-            <img src="https://images.unsplash.com/photo-1540420773420-3366772f4999?auto=format&fit=crop&w=400&q=80" alt="Salad dish" class="hidden lg:block absolute top-12 right-28 w-80 h-72 object-cover rounded-full shadow-2xl z-10 border-4 border-amber-900/40">
-            <img src="https://images.unsplash.com/photo-1514432324607-a09d9b4aefdd?auto=format&fit=crop&w=200&q=80" alt="Coffee beans" class="hidden lg:block absolute bottom-10 right-1/3 w-32 h-24 object-contain opacity-80 pointer-events-none">
-            <img src="https://images.unsplash.com/photo-1589301760014-d929f3979dbc?auto=format&fit=crop&w=150&q=80" alt="Spices" class="hidden lg:block absolute top-12 left-4 w-28 h-28 object-contain pointer-events-none">
-
-            <div class="max-w-xl text-center md:text-left py-8 relative z-10">
-                <h1 class="text-3xl sm:text-4xl md:text-5xl font-serif text-amber-500 font-medium leading-tight">
-                    Добро пожаловать в
-                </h1>
-                <h2 class="text-4xl sm:text-5xl md:text-6xl font-serif text-brand-orange font-bold mt-1 mb-3">
-                    Наш ресторан
-                </h2>
-                <div class="flex items-center justify-center md:justify-start space-x-3 my-4">
-                    <span class="w-8 h-[1px] bg-amber-500/60"></span>
-                    <span class="text-xs uppercase tracking-widest text-amber-200/80 font-light">дом лучшей еды</span>
-                    <span class="w-8 h-[1px] bg-amber-500/60"></span>
-                </div>
-
-                <div class="mt-8">
-                    <a href="#our-menu" class="inline-block bg-brand-orange hover:bg-brand-darkOrange text-white text-xs font-bold uppercase tracking-widest px-8 py-4 rounded shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-1">
-                        VIEW MENU
-                    </a>
-                </div>
+            <div class="flex items-center gap-4 mb-4">
+              <ul class="text-xs text-gray-500 space-y-1 w-1/2">
+                <li>• Краткое описание</li>
+                <li>• Что-то о курсе</li>
+                <li>• Пару фактов</li>
+                <li>• Краткое описание</li>
+              </ul>
+              <img src="images/course-model.jpg" alt="Модель" class="w-1/2 h-24 object-contain">
             </div>
+          </div>
+          <div>
+            <div class="px-6 py-2 text-xs text-gray-400 font-medium">Свободно 2 из 15 мест</div>
+            <button onclick="openModal('Курс: Канюльные техники')" class="w-full py-3 bg-brandPurple hover:bg-brandPurpleHover text-white font-semibold transition">Зарегистрироваться</button>
+            <button class="w-full py-2 bg-purple-50 text-brandPurple text-xs font-semibold hover:bg-purple-100 transition">Подробнее</button>
+          </div>
         </div>
-    </header>
 
-    <!-- Top Feature Cards Overlapping Banner -->
-    <section class="relative z-30 max-w-6xl mx-auto px-4 -mt-20 sm:-mt-24">
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <!-- Карточка 2 -->
+        <div class="border border-gray-100 rounded-2xl overflow-hidden card-shadow flex flex-col justify-between bg-white">
+          <div class="p-6">
+            <div class="flex justify-between items-center mb-4">
+              <span class="text-xs text-gray-400 font-medium">Курс для медиков</span>
+              <i class="fa-solid fa-dove text-brandGreen text-lg"></i>
+            </div>
+            <h3 class="text-xl font-bold text-brandGreen mb-3">Мезотерапия и биоревитализация</h3>
+            <span class="inline-block bg-brandGreen text-white text-xs font-semibold px-4 py-1 rounded-full mb-4">Онлайн</span>
+            <div class="text-sm font-semibold text-gray-700 mb-4">15 - 20 мая</div>
             
-            <!-- Card 1 -->
-            <div class="bg-white rounded-lg p-8 shadow-xl text-center border-t-4 border-amber-500 transform hover:-translate-y-1 transition-all duration-300">
-                <div class="w-16 h-16 mx-auto mb-4 flex items-center justify-center text-brand-orange text-3xl">
-                    <i class="fa-solid fa-utensils"></i>
-                </div>
-                <h3 class="text-lg font-serif font-bold text-gray-800 mb-2">
-                    Магическая <span class="text-amber-600">Атмосфера</span>
-                </h3>
-                <p class="text-xs text-gray-500 leading-relaxed">
-                    В нашем заведении царит магическая атмосфера наполненная вкусными ароматами
-                </p>
+            <div class="flex items-center gap-4 mb-4">
+              <ul class="text-xs text-gray-500 space-y-1 w-1/2">
+                <li>• Краткое описание</li>
+                <li>• Что-то о курсе</li>
+                <li>• Пару фактов</li>
+                <li>• Краткое описание</li>
+              </ul>
+              <img src="images/course-model.jpg" alt="Модель" class="w-1/2 h-24 object-contain">
             </div>
-
-            <!-- Card 2 -->
-            <div class="bg-white rounded-lg p-8 shadow-xl text-center border-t-4 border-amber-500 transform hover:-translate-y-1 transition-all duration-300">
-                <div class="w-16 h-16 mx-auto mb-4 flex items-center justify-center text-brand-orange text-3xl">
-                    <i class="fa-solid fa-bell-concierge"></i>
-                </div>
-                <h3 class="text-lg font-serif font-bold text-gray-800 mb-2">
-                    Лучшее качество <span class="text-amber-600">Еды</span>
-                </h3>
-                <p class="text-xs text-gray-500 leading-relaxed">
-                    Качество нашей Еды - отменное! Готовим исключительно из свежих отборных продуктов.
-                </p>
-            </div>
-
-            <!-- Card 3 -->
-            <div class="bg-white rounded-lg p-8 shadow-xl text-center border-t-4 border-amber-500 transform hover:-translate-y-1 transition-all duration-300">
-                <div class="w-16 h-16 mx-auto mb-4 flex items-center justify-center text-brand-orange text-3xl">
-                    <i class="fa-solid fa-receipt"></i>
-                </div>
-                <h3 class="text-lg font-serif font-bold text-gray-800 mb-2">
-                    Недорогая <span class="text-amber-600">Еда</span>
-                </h3>
-                <p class="text-xs text-gray-500 leading-relaxed">
-                    Стоимость нашей Еды зависит только от ее количества. Качество всегда на высоте!
-                </p>
-            </div>
-
+          </div>
+          <div>
+            <div class="px-6 py-2 text-xs text-gray-400 font-medium">Свободно 2 из 15 мест</div>
+            <button onclick="openModal('Курс: Мезотерапия')" class="w-full py-3 bg-brandGreen hover:bg-brandGreenHover text-white font-semibold transition">Зарегистрироваться</button>
+            <button class="w-full py-2 bg-brandLightBg text-brandGreen text-xs font-semibold hover:bg-green-100 transition">Подробнее</button>
+          </div>
         </div>
-    </section>
 
-    <!-- About / Our History Section -->
-    <section id="about" class="py-20 md:py-28 bg-white">
-        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-                
-                <!-- Left Column: Story Text & Stats -->
-                <div>
-                    <h2 class="text-3xl sm:text-4xl font-serif text-gray-900 font-bold mb-6">
-                        Наша <span class="text-brand-orange">История</span>
-                    </h2>
-                    <p class="text-xs sm:text-sm text-gray-500 leading-relaxed mb-10 text-justify">
-                        Как и у любого другого самобытного места, у нас есть своя, особая история. Идея ресторана пришла основателям неожиданно. Во время прогулки по лесу создатель нашего ресторана застрял в сотнях километров от ближайшего населенного пункта. Вдали от цивилизации и связи им пришлось на время обустроить себе нехитрый быт, добывать и готовить себе еду.
-                    </p>
-
-                    <!-- Stats Counter Grid -->
-                    <div class="grid grid-cols-3 gap-4 text-center border-t border-gray-100 pt-8">
-                        <div>
-                            <span class="block text-3xl sm:text-4xl font-serif font-bold text-amber-600">93</span>
-                            <span class="text-xs font-semibold text-gray-600 uppercase tracking-wider mt-1 block">Напитки</span>
-                        </div>
-                        <div>
-                            <span class="block text-3xl sm:text-4xl font-serif font-bold text-amber-600">206</span>
-                            <span class="text-xs font-semibold text-gray-600 uppercase tracking-wider mt-1 block">Еда</span>
-                        </div>
-                        <div>
-                            <span class="block text-3xl sm:text-4xl font-serif font-bold text-amber-600">71</span>
-                            <span class="text-xs font-semibold text-gray-600 uppercase tracking-wider mt-1 block">Закуски</span>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Right Column: Stacked Image Collage -->
-                <div class="relative flex justify-center lg:justify-end items-center h-80 sm:h-96">
-                    <!-- Background accent square -->
-                    <div class="absolute right-4 top-4 w-60 h-72 bg-amber-100 rounded-lg -z-0"></div>
-                    
-                    <!-- Image 1: Main Dishes (Left stacked) -->
-                    <img src="https://images.unsplash.com/photo-1555396273-367ea4eb4db5?auto=format&fit=crop&w=400&q=80" 
-                         alt="Indian Food Dishes" 
-                         class="absolute left-0 sm:left-4 top-0 w-48 sm:w-56 h-64 sm:h-72 object-cover rounded shadow-2xl z-10 border-2 border-white">
-
-                    <!-- Image 2: Interior / Drinks (Center stacked) -->
-                    <img src="https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&w=400&q=80" 
-                         alt="Restaurant interior" 
-                         class="absolute right-12 sm:right-20 top-6 w-44 sm:w-52 h-64 sm:h-80 object-cover rounded shadow-xl z-20 border-2 border-white">
-
-                    <!-- Image 3: Cozy Dining Table (Foreground stacked) -->
-                    <img src="https://images.unsplash.com/photo-1550966871-3ed3cdb5ed0c?auto=format&fit=crop&w=400&q=80" 
-                         alt="Restaurant dining table" 
-                         class="absolute right-0 bottom-0 w-48 sm:w-56 h-48 sm:h-56 object-cover rounded shadow-2xl z-30 border-4 border-white">
-                </div>
-
+        <!-- Карточка 3 -->
+        <div class="border border-gray-100 rounded-2xl overflow-hidden card-shadow flex flex-col justify-between bg-white">
+          <div class="p-6">
+            <div class="flex justify-between items-center mb-4">
+              <span class="text-xs text-gray-400 font-medium">Курс для медиков</span>
+              <i class="fa-solid fa-dove text-brandGreen text-lg"></i>
             </div>
+            <h3 class="text-xl font-bold text-teal-600 mb-3">Биогель - новое в косметологии</h3>
+            <span class="inline-block bg-teal-500 text-white text-xs font-semibold px-4 py-1 rounded-full mb-4">Мастер-класс</span>
+            <div class="text-sm font-semibold text-gray-700 mb-4">2 - 5 августа</div>
+            
+            <div class="flex items-center gap-4 mb-4">
+              <ul class="text-xs text-gray-500 space-y-1 w-1/2">
+                <li>• Краткое описание</li>
+                <li>• Что-то о курсе</li>
+                <li>• Пару фактов</li>
+                <li>• Краткое описание</li>
+              </ul>
+              <img src="images/course-model.jpg" alt="Модель" class="w-1/2 h-24 object-contain">
+            </div>
+          </div>
+          <div>
+            <div class="px-6 py-2 text-xs text-gray-400 font-medium">Свободно 2 из 15 мест</div>
+            <button onclick="openModal('Курс: Биогель')" class="w-full py-3 bg-teal-500 hover:bg-teal-600 text-white font-semibold transition">Зарегистрироваться</button>
+            <button class="w-full py-2 bg-teal-50 text-teal-600 text-xs font-semibold hover:bg-teal-100 transition">Подробнее</button>
+          </div>
         </div>
-    </section>
+      </div>
+    </div>
+  </section>
 
-    <!-- Promotional Offer Banner -->
-    <section class="bg-promo-banner py-20 text-white relative">
-        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row items-center justify-between gap-8">
-            <div class="max-w-2xl text-center md:text-left">
-                <h2 class="text-2xl sm:text-3xl md:text-4xl font-serif text-amber-500 font-bold leading-snug">
-                    Отпразднуйте в одном из самых лучших ресторанов.
-                </h2>
-                <p class="text-sm sm:text-base font-semibold text-gray-200 mt-3">
-                    Только в этом месяце бизнес-ланч от 250 ₽
-                </p>
-            </div>
+  <!-- О НАС -->
+  <section id="about" class="py-16 bg-gray-50">
+    <div class="max-w-7xl mx-auto px-4 grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+      <div class="rounded-2xl overflow-hidden shadow-lg">
+        <img src="images/about-center.jpg" alt="Учебный центр ValMari" class="w-full h-[400px] object-cover">
+      </div>
+      <div>
+        <span class="text-sm text-gray-400 uppercase tracking-widest font-semibold">О нас</span>
+        <h2 class="text-2xl md:text-3xl font-extrabold text-gray-800 mt-2 mb-6">
+          <span class="text-brandGreen">VALMARI</span> ВЕДУЩИЙ УЧЕБНЫЙ ЦЕНТР ЭСТЕТИЧЕСКОЙ КОСМЕТОЛОГИИ
+        </h2>
+        <p class="text-gray-600 mb-4 leading-relaxed">Описание может быть любое. Ведущий учебный центр эстетической косметологии.</p>
+        <p class="text-gray-600 mb-8 leading-relaxed">
+          Более 5 лет мы проводим сертифицированные курсы профессионального образования в области косметологии и индустрии красоты, здоровья и молодости.
+        </p>
+        <a href="#courses" class="inline-flex items-center gap-2 text-brandGreen font-bold hover:underline">
+          Подробнее <i class="fa-solid fa-arrow-right"></i>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ОБУЧЕНИЕ КОСМЕТОЛОГОВ (ПЛИТКИ) -->
+  <section class="py-16 bg-white">
+    <div class="max-w-7xl mx-auto px-4">
+      <h2 class="text-2xl md:text-3xl font-bold text-center text-gray-800 mb-12">Обучение косметологов</h2>
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div class="relative rounded-xl overflow-hidden h-48 group cursor-pointer shadow-md">
+          <img src="images/tile-courses.jpg" class="w-full h-full object-cover group-hover:scale-105 transition duration-300">
+          <div class="absolute inset-0 bg-black/40 flex flex-col justify-end p-6 text-white">
+            <h3 class="text-xl font-bold">КУРСЫ КОСМЕТОЛОГИИ</h3>
+            <p class="text-xs text-gray-200 mt-1">• эстетическая • инъекционная • лазерная</p>
+          </div>
+        </div>
+        <div class="relative rounded-xl overflow-hidden h-48 group cursor-pointer shadow-md">
+          <img src="images/tile-online.jpg" class="w-full h-full object-cover group-hover:scale-105 transition duration-300">
+          <div class="absolute inset-0 bg-black/40 flex items-end p-6 text-white">
+            <h3 class="text-xl font-bold">ОНЛАЙН ОБУЧЕНИЕ</h3>
+          </div>
+        </div>
+        <div class="relative rounded-xl overflow-hidden h-48 group cursor-pointer shadow-md">
+          <img src="images/tile-masterclass.jpg" class="w-full h-full object-cover group-hover:scale-105 transition duration-300">
+          <div class="absolute inset-0 bg-black/40 flex items-end p-6 text-white">
+            <h3 class="text-xl font-bold">МАСТЕР-КЛАССЫ</h3>
+          </div>
+        </div>
+        <div class="relative rounded-xl overflow-hidden h-48 group cursor-pointer shadow-md">
+          <img src="images/tile-schedule.jpg" class="w-full h-full object-cover group-hover:scale-105 transition duration-300">
+          <div class="absolute inset-0 bg-black/40 flex items-end p-6 text-white">
+            <h3 class="text-xl font-bold">РАСПИСАНИЕ</h3>
+          </div>
+        </div>
+        <div class="relative rounded-xl overflow-hidden h-48 group cursor-pointer shadow-md">
+          <img src="images/tile-promos.jpg" class="w-full h-full object-cover group-hover:scale-105 transition duration-300">
+          <div class="absolute inset-0 bg-black/40 flex items-end p-6 text-white">
+            <h3 class="text-xl font-bold">АКЦИИ</h3>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ВЕДЕМ НАБОР МОДЕЛЕЙ -->
+  <section class="py-16 bg-gray-50">
+    <div class="max-w-7xl mx-auto px-4 grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+      <div>
+        <h2 class="text-2xl md:text-3xl font-extrabold text-brandGreen mb-6">ВЕДЕМ НАБОР МОДЕЛЕЙ</h2>
+        <p class="text-gray-600 mb-4">Мы предлагаем свои услуги для моделей.</p>
+        <p class="text-gray-600 mb-8">Выберите процедуру или несколько процедур и наш менеджер проконсультирует вас и назовет ближайшую дату, когда вы сможете получить эту процедуру.</p>
+        <button onclick="openModal('Заявка на роль модели')" class="bg-brandGreen hover:bg-brandGreenHover text-white font-bold px-8 py-4 rounded shadow-md transition">
+          Стать моделью
+        </button>
+      </div>
+      <div class="rounded-2xl overflow-hidden shadow-lg">
+        <img src="images/models-needed.jpg" alt="Набор моделей" class="w-full h-[350px] object-cover">
+      </div>
+    </div>
+  </section>
+
+  <!-- МАСТЕР-КЛАССЫ -->
+  <section id="masterclasses" class="py-16 bg-white">
+    <div class="max-w-7xl mx-auto px-4">
+      <h2 class="text-2xl md:text-3xl font-bold text-center text-gray-800 mb-2">Мастер-классы</h2>
+      <p class="text-gray-500 text-center mb-12">Мероприятия для повышения квалификации косметологов</p>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+        <div class="border border-gray-100 rounded-xl overflow-hidden card-shadow flex flex-col md:flex-row">
+          <img src="images/masterclass-laser.jpg" class="w-full md:w-1/2 h-48 md:h-auto object-cover">
+          <div class="p-6 flex flex-col justify-between w-full md:w-1/2">
             <div>
-                <button onclick="openBookingModal()" class="bg-brand-orange hover:bg-brand-darkOrange text-white text-xs font-bold uppercase tracking-widest px-8 py-4 rounded shadow-xl transition-all duration-300 transform hover:scale-105">
-                    ЗАКАЗ СТОЛИКА
-                </button>
+              <div class="text-xs text-gray-400 mb-2">3 ноября, 10:00-12:00</div>
+              <h3 class="font-bold text-gray-800 text-sm mb-2">10 возможностей неодимового лазера. Лазерный пилинг, удаление тату/татуажа</h3>
+              <p class="text-xs text-gray-500 mb-4">Тренер: Юлия Щукина</p>
             </div>
+            <div class="flex items-center justify-between pt-4 border-t border-gray-100">
+              <span class="font-bold text-brandGreen">2000 грн</span>
+              <button onclick="openModal('Мастер-класс: Неодимовый лазер')" class="w-10 h-10 rounded-full bg-brandGreen text-white flex items-center justify-center hover:bg-brandGreenHover transition">
+                <i class="fa-solid fa-arrow-right"></i>
+              </button>
+            </div>
+          </div>
         </div>
-    </section>
 
-    <!-- Featured Dishes / Burgers Section ("Наши Блюда") -->
-    <section class="py-20 bg-white">
-        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-            
-            <!-- Section Title -->
-            <div class="text-center mb-16">
-                <h2 class="text-3xl sm:text-4xl font-serif font-bold text-gray-900">
-                    Наши <span class="text-brand-orange">Блюда</span>
-                </h2>
+        <div class="border border-gray-100 rounded-xl overflow-hidden card-shadow flex flex-col md:flex-row">
+          <img src="images/masterclass-cosmetology.jpg" class="w-full md:w-1/2 h-48 md:h-auto object-cover">
+          <div class="p-6 flex flex-col justify-between w-full md:w-1/2">
+            <div>
+              <div class="text-xs text-gray-400 mb-2">20 ноября, 12:00-17:00</div>
+              <h3 class="font-bold text-gray-800 text-sm mb-2">Профессия косметолог. Семинар для новичков и профессионалов</h3>
+              <p class="text-xs text-gray-500 mb-4">Спикеры: Марина Спивак, Алина Ядчишина</p>
             </div>
-
-            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-                
-                <!-- Left: Big Pizza Image on dark background -->
-                <div class="relative rounded-lg overflow-hidden shadow-2xl bg-black group">
-                    <img src="https://images.unsplash.com/photo-1513104890138-7c749659a591?auto=format&fit=crop&w=800&q=80" 
-                         alt="Fresh Special Pizza" 
-                         class="w-full h-80 sm:h-96 object-cover opacity-90 group-hover:scale-105 transition-transform duration-500">
-                    <div class="absolute bottom-6 left-6 right-6 text-white bg-black/60 p-4 rounded backdrop-blur-sm">
-                        <h3 class="text-lg font-serif font-bold text-amber-400">Фирменная Пицца от Шефа</h3>
-                        <p class="text-xs text-gray-300 mt-1">Традиционное хрустящее тесто, свежий базилик и томаты</p>
-                    </div>
-                </div>
-
-                <!-- Right: Burger Menu Items List -->
-                <div class="space-y-6">
-                    
-                    <!-- Mini Burger Item 1 -->
-                    <div class="flex items-center space-x-4 p-2 rounded-lg hover:bg-amber-50/50 transition-colors">
-                        <img src="https://images.unsplash.com/photo-1568901346375-23c9450c58cd?auto=format&fit=crop&w=150&q=80" 
-                             alt="Гамбургер мини" 
-                             class="w-20 h-20 object-cover rounded shadow">
-                        <div class="flex-1 flex items-baseline">
-                            <span class="text-sm sm:text-base font-serif font-bold text-gray-800">Гамбургер мини</span>
-                            <span class="dotted-line"></span>
-                            <span class="text-sm font-bold text-amber-700">220 ₽</span>
-                        </div>
-                        <button onclick="addToCart('Гамбургер мини', 220)" class="text-xs text-white bg-brand-orange hover:bg-brand-darkOrange px-3 py-1.5 rounded transition">
-                            <i class="fa-solid fa-plus"></i>
-                        </button>
-                    </div>
-
-                    <!-- Mini Burger Item 2 -->
-                    <div class="flex items-center space-x-4 p-2 rounded-lg hover:bg-amber-50/50 transition-colors">
-                        <img src="https://images.unsplash.com/photo-1586190848861-99aa4a171e90?auto=format&fit=crop&w=150&q=80" 
-                             alt="Гамбургер мини" 
-                             class="w-20 h-20 object-cover rounded shadow">
-                        <div class="flex-1 flex items-baseline">
-                            <span class="text-sm sm:text-base font-serif font-bold text-gray-800">Гамбургер мини</span>
-                            <span class="dotted-line"></span>
-                            <span class="text-sm font-bold text-amber-700">220 ₽</span>
-                        </div>
-                        <button onclick="addToCart('Гамбургер мини', 220)" class="text-xs text-white bg-brand-orange hover:bg-brand-darkOrange px-3 py-1.5 rounded transition">
-                            <i class="fa-solid fa-plus"></i>
-                        </button>
-                    </div>
-
-                    <!-- Mini Burger Item 3 -->
-                    <div class="flex items-center space-x-4 p-2 rounded-lg hover:bg-amber-50/50 transition-colors">
-                        <img src="https://images.unsplash.com/photo-1550547660-d9450f859349?auto=format&fit=crop&w=150&q=80" 
-                             alt="Гамбургер мини" 
-                             class="w-20 h-20 object-cover rounded shadow">
-                        <div class="flex-1 flex items-baseline">
-                            <span class="text-sm sm:text-base font-serif font-bold text-gray-800">Гамбургер мини</span>
-                            <span class="dotted-line"></span>
-                            <span class="text-sm font-bold text-amber-700">220 ₽</span>
-                        </div>
-                        <button onclick="addToCart('Гамбургер мини', 220)" class="text-xs text-white bg-brand-orange hover:bg-brand-darkOrange px-3 py-1.5 rounded transition">
-                            <i class="fa-solid fa-plus"></i>
-                        </button>
-                    </div>
-
-                </div>
-
+            <div class="flex items-center justify-between pt-4 border-t border-gray-100">
+              <span class="font-bold text-brandGreen">Бесплатно</span>
+              <button onclick="openModal('Мастер-класс: Профессия косметолог')" class="w-10 h-10 rounded-full bg-brandGreen text-white flex items-center justify-center hover:bg-brandGreenHover transition">
+                <i class="fa-solid fa-arrow-right"></i>
+              </button>
             </div>
+          </div>
         </div>
-    </section>
-
-    <!-- Our Menu Section ("Наше меню") -->
-    <section id="our-menu" class="bg-brick-texture py-24 text-white relative">
-        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-            
-            <div class="text-center mb-16">
-                <h2 class="text-3xl sm:text-4xl font-serif font-bold text-white tracking-wide">
-                    Наше <span class="text-brand-orange">меню</span>
-                </h2>
-            </div>
-
-            <!-- 3 Recommended Food Cards -->
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-                
-                <!-- Card 1 -->
-                <div class="bg-white rounded-lg text-gray-800 overflow-hidden shadow-2xl relative pt-6 pb-8 px-6 text-center transform hover:-translate-y-2 transition-all duration-300">
-                    <!-- Recommended Badge -->
-                    <span class="absolute top-0 left-0 bg-brand-orange text-white text-[10px] font-bold uppercase tracking-wider px-3 py-1 rounded-br">
-                        RECOMMENDED
-                    </span>
-
-                    <!-- Round Food Image Container with overlapping price -->
-                    <div class="relative w-44 h-44 mx-auto mb-6 mt-4">
-                        <img src="https://images.unsplash.com/photo-1568901346375-23c9450c58cd?auto=format&fit=crop&w=300&q=80" 
-                             alt="Гамбургер макси" 
-                             class="w-full h-full object-cover rounded-full border-4 border-amber-100 shadow-md">
-                        <div class="absolute bottom-1 right-1 bg-amber-600 text-white font-serif font-bold text-lg w-14 h-14 rounded-full flex items-center justify-center price-badge border-2 border-white">
-                            420
-                        </div>
-                    </div>
-
-                    <h3 class="text-lg font-serif font-bold text-gray-900 mb-2">Гамбургер макси</h3>
-                    <p class="text-xs text-gray-500 mb-6 leading-relaxed">Максимально толстый слой сочного мяса с авторским соусом</p>
-                    
-                    <button onclick="addToCart('Гамбургер макси', 420)" class="w-full bg-brand-orange hover:bg-brand-darkOrange text-white text-xs font-bold uppercase tracking-wider py-3 rounded shadow transition">
-                        ЗАКАЗАТЬ
-                    </button>
-                </div>
-
-                <!-- Card 2 -->
-                <div class="bg-white rounded-lg text-gray-800 overflow-hidden shadow-2xl relative pt-6 pb-8 px-6 text-center transform hover:-translate-y-2 transition-all duration-300">
-                    <div class="relative w-44 h-44 mx-auto mb-6 mt-4">
-                        <img src="https://images.unsplash.com/photo-1586190848861-99aa4a171e90?auto=format&fit=crop&w=300&q=80" 
-                             alt="Гамбургер макси" 
-                             class="w-full h-full object-cover rounded-full border-4 border-amber-100 shadow-md">
-                        <div class="absolute bottom-1 right-1 bg-amber-600 text-white font-serif font-bold text-lg w-14 h-14 rounded-full flex items-center justify-center price-badge border-2 border-white">
-                            420
-                        </div>
-                    </div>
-
-                    <h3 class="text-lg font-serif font-bold text-gray-900 mb-2">Гамбургер макси</h3>
-                    <p class="text-xs text-gray-500 mb-6 leading-relaxed">Максимально толстый слой сочного мяса с авторским соусом</p>
-                    
-                    <button onclick="addToCart('Гамбургер макси', 420)" class="w-full bg-brand-orange hover:bg-brand-darkOrange text-white text-xs font-bold uppercase tracking-wider py-3 rounded shadow transition">
-                        ЗАКАЗАТЬ
-                    </button>
-                </div>
-
-                <!-- Card 3 -->
-                <div class="bg-white rounded-lg text-gray-800 overflow-hidden shadow-2xl relative pt-6 pb-8 px-6 text-center transform hover:-translate-y-2 transition-all duration-300">
-                    <div class="relative w-44 h-44 mx-auto mb-6 mt-4">
-                        <img src="https://images.unsplash.com/photo-1550547660-d9450f859349?auto=format&fit=crop&w=300&q=80" 
-                             alt="Гамбургер макси" 
-                             class="w-full h-full object-cover rounded-full border-4 border-amber-100 shadow-md">
-                        <div class="absolute bottom-1 right-1 bg-amber-600 text-white font-serif font-bold text-lg w-14 h-14 rounded-full flex items-center justify-center price-badge border-2 border-white">
-                            420
-                        </div>
-                    </div>
-
-                    <h3 class="text-lg font-serif font-bold text-gray-900 mb-2">Гамбургер макси</h3>
-                    <p class="text-xs text-gray-500 mb-6 leading-relaxed">Максимально толстый слой сочного мяса с авторским соусом</p>
-                    
-                    <button onclick="addToCart('Гамбургер макси', 420)" class="w-full bg-brand-orange hover:bg-brand-darkOrange text-white text-xs font-bold uppercase tracking-wider py-3 rounded shadow transition">
-                        ЗАКАЗАТЬ
-                    </button>
-                </div>
-
-            </div>
-
-        </div>
-    </section>
-
-    <!-- Customer Testimonials Section -->
-    <section class="py-20 bg-gray-200">
-        <div class="max-w-4xl mx-auto px-4 text-center">
-            
-            <div id="testimonial-container" class="min-h-[220px] flex flex-col justify-center items-center">
-                <!-- Quote text -->
-                <p id="testimonial-quote" class="italic text-gray-700 text-sm sm:text-base leading-relaxed max-w-2xl font-serif">
-                    "Я надолго запомню мой День рождения, проведённый в этом ресторане! Кусочек родной Армении!!! Отдельное спасибо за комплемент в виде фруктовой тарелки. Будем рекомендовать этот ресторан своим друзьям и родственникам также за рубежом, путешествующих в Санкт-Петербург!!"
-                </p>
-
-                <!-- Customer Info -->
-                <div class="mt-8 flex flex-col items-center">
-                    <img id="testimonial-avatar" 
-                         src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=150&q=80" 
-                         alt="Николай" 
-                         class="w-16 h-16 rounded-full border-2 border-white shadow-md object-cover">
-                    <span id="testimonial-role" class="text-xs text-gray-500 mt-2 font-medium">Посетитель</span>
-                    <span id="testimonial-name" class="text-sm font-bold text-gray-900 mt-0.5">Николай</span>
-                </div>
-            </div>
-
-            <!-- Carousel Pagination Dots -->
-            <div class="flex justify-center space-x-2 mt-6">
-                <button onclick="switchTestimonial(0)" class="dot-btn w-2.5 h-2.5 rounded-full bg-brand-orange transition-all"></button>
-                <button onclick="switchTestimonial(1)" class="dot-btn w-2.5 h-2.5 rounded-full bg-gray-400 hover:bg-gray-600 transition-all"></button>
-                <button onclick="switchTestimonial(2)" class="dot-btn w-2.5 h-2.5 rounded-full bg-gray-400 hover:bg-gray-600 transition-all"></button>
-            </div>
-
-        </div>
-    </section>
-
-    <!-- Gallery Dishes & Our Chefs Section -->
-    <section class="py-20 bg-white">
-        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-            
-            <!-- Gallery Title -->
-            <div class="text-center mb-12">
-                <h2 class="text-3xl sm:text-4xl font-serif font-bold text-gray-900">
-                    Галерея <span class="text-brand-orange">Блюд</span>
-                </h2>
-            </div>
-
-            <!-- Food Photos Grid -->
-            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 mb-24">
-                <div class="h-56 rounded overflow-hidden shadow hover:shadow-xl transition group">
-                    <img src="https://images.unsplash.com/photo-1510812431401-41d2bd2722f3?auto=format&fit=crop&w=500&q=80" alt="Wine glasses" class="w-full h-full object-cover group-hover:scale-110 transition duration-500">
-                </div>
-                <div class="h-56 rounded overflow-hidden shadow hover:shadow-xl transition group">
-                    <img src="https://images.unsplash.com/photo-1514432324607-a09d9b4aefdd?auto=format&fit=crop&w=500&q=80" alt="Coffee and dessert" class="w-full h-full object-cover group-hover:scale-110 transition duration-500">
-                </div>
-                <div class="h-56 rounded overflow-hidden shadow hover:shadow-xl transition group">
-                    <img src="https://images.unsplash.com/photo-1547592166-23ac45744acd?auto=format&fit=crop&w=500&q=80" alt="Soup dish" class="w-full h-full object-cover group-hover:scale-110 transition duration-500">
-                </div>
-                <div class="h-56 rounded overflow-hidden shadow hover:shadow-xl transition group">
-                    <img src="https://images.unsplash.com/photo-1514432324607-a09d9b4aefdd?auto=format&fit=crop&w=500&q=80" alt="Coffee art" class="w-full h-full object-cover group-hover:scale-110 transition duration-500">
-                </div>
-                <div class="h-56 rounded overflow-hidden shadow hover:shadow-xl transition group">
-                    <img src="https://images.unsplash.com/photo-1547592166-23ac45744acd?auto=format&fit=crop&w=500&q=80" alt="Fresh soup bowl" class="w-full h-full object-cover group-hover:scale-110 transition duration-500">
-                </div>
-                <div class="h-56 rounded overflow-hidden shadow hover:shadow-xl transition group">
-                    <img src="https://images.unsplash.com/photo-1510812431401-41d2bd2722f3?auto=format&fit=crop&w=500&q=80" alt="Wine restaurant" class="w-full h-full object-cover group-hover:scale-110 transition duration-500">
-                </div>
-            </div>
-
-            <!-- Chefs Title -->
-            <div class="text-center mb-12">
-                <h2 class="text-3xl sm:text-4xl font-serif font-bold text-gray-900">
-                    Наши <span class="text-brand-orange">Повара</span>
-                </h2>
-            </div>
-
-            <!-- Chefs Cards Grid -->
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-                <div class="rounded-lg overflow-hidden shadow-lg border border-gray-100 group">
-                    <div class="h-80 overflow-hidden">
-                        <img src="https://images.unsplash.com/photo-1577219491135-ce391730fb2c?auto=format&fit=crop&w=500&q=80" alt="Chef female" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
-                    </div>
-                </div>
-
-                <div class="rounded-lg overflow-hidden shadow-lg border border-gray-100 group">
-                    <div class="h-80 overflow-hidden">
-                        <img src="https://images.unsplash.com/photo-1583394838336-acd977736f90?auto=format&fit=crop&w=500&q=80" alt="Chef making pizza" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
-                    </div>
-                </div>
-
-                <div class="rounded-lg overflow-hidden shadow-lg border border-gray-100 group">
-                    <div class="h-80 overflow-hidden">
-                        <img src="https://images.unsplash.com/photo-1607631568010-a87245c0daf8?auto=format&fit=crop&w=500&q=80" alt="Chef plating" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
-                    </div>
-                </div>
-            </div>
-
-        </div>
-    </section>
-
-    <!-- Footer Section with Background Interior & Table Reservation -->
-    <footer id="reservation" class="bg-footer-interior text-white relative pt-20 pb-12 border-t border-amber-900/40">
-        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-                
-                <!-- Footer Info Column -->
-                <div class="space-y-6 text-center lg:text-left">
-                    <h3 class="text-3xl font-serif font-bold text-amber-400">Дом Лучшей Еды</h3>
-                    <p class="text-sm text-gray-300 max-w-md mx-auto lg:mx-0 leading-relaxed">
-                        Приходите за незабываемыми гастрономическими впечатлениями. Мы всегда рады видеть вас и ваших гостей!
-                    </p>
-                    <div class="space-y-3 text-sm text-gray-300">
-                        <p><i class="fa-solid fa-location-dot text-brand-orange mr-3"></i> Санкт-Петербург, Невский проспект, 45</p>
-                        <p><i class="fa-solid fa-clock text-brand-orange mr-3"></i> Ежедневно с 11:00 до 23:00</p>
-                        <p><i class="fa-solid fa-phone text-brand-orange mr-3"></i> +999-888-76-54</p>
-                    </div>
-                </div>
-
-                <!-- Quick Reservation Card -->
-                <div class="bg-zinc-900/90 p-8 rounded-lg border border-amber-900/50 shadow-2xl backdrop-blur-md">
-                    <h4 class="text-xl font-serif font-bold text-amber-400 mb-6 text-center">Забронировать стол</h4>
-                    <form onsubmit="handleBookingSubmit(event)" class="space-y-4">
-                        <div>
-                            <input type="text" required placeholder="Ваше имя" class="w-full px-4 py-3 rounded bg-zinc-800 text-white border border-zinc-700 text-xs focus:outline-none focus:border-brand-orange">
-                        </div>
-                        <div>
-                            <input type="tel" required placeholder="Телефон" class="w-full px-4 py-3 rounded bg-zinc-800 text-white border border-zinc-700 text-xs focus:outline-none focus:border-brand-orange">
-                        </div>
-                        <div class="grid grid-cols-2 gap-4">
-                            <input type="date" required class="w-full px-4 py-3 rounded bg-zinc-800 text-white border border-zinc-700 text-xs focus:outline-none focus:border-brand-orange">
-                            <select class="w-full px-4 py-3 rounded bg-zinc-800 text-white border border-zinc-700 text-xs focus:outline-none focus:border-brand-orange">
-                                <option value="2">2 человека</option>
-                                <option value="3">3-4 человека</option>
-                                <option value="5">5+ человек</option>
-                            </select>
-                        </div>
-                        <button type="submit" class="w-full bg-brand-orange hover:bg-brand-darkOrange text-white text-xs font-bold uppercase tracking-wider py-4 rounded transition">
-                            ОТПРАВИТЬ ЗАЯВКУ
-                        </button>
-                    </form>
-                </div>
-
-            </div>
-
-            <!-- Copyright Line -->
-            <div class="mt-16 pt-8 border-t border-zinc-800 text-center text-xs text-gray-500">
-                <p>&copy; 2026 Дом Лучшей Еды. Все права защищены.</p>
-            </div>
-        </div>
-    </footer>
-
-    <!-- Table Booking Modal -->
-    <div id="booking-modal" class="fixed inset-0 bg-black/70 backdrop-blur-sm z-50 hidden items-center justify-center p-4">
-        <div class="bg-zinc-900 border border-amber-900/60 text-white rounded-lg p-8 max-w-md w-full relative shadow-2xl">
-            <button onclick="closeBookingModal()" class="absolute top-4 right-4 text-gray-400 hover:text-white text-xl">
-                <i class="fa-solid fa-xmark"></i>
-            </button>
-            <h3 class="text-2xl font-serif font-bold text-amber-400 mb-2 text-center">Заказ Столика</h3>
-            <p class="text-xs text-gray-400 mb-6 text-center">Оставьте контакты и мы перезвоним для подтверждения</p>
-            
-            <form onsubmit="handleBookingSubmit(event)" class="space-y-4">
-                <div>
-                    <label class="block text-xs text-gray-400 mb-1">Имя</label>
-                    <input type="text" required placeholder="Иван Иванов" class="w-full px-4 py-2.5 rounded bg-zinc-800 text-white border border-zinc-700 text-xs focus:outline-none focus:border-brand-orange">
-                </div>
-                <div>
-                    <label class="block text-xs text-gray-400 mb-1">Номер телефона</label>
-                    <input type="tel" required placeholder="+7 (999) 000-00-00" class="w-full px-4 py-2.5 rounded bg-zinc-800 text-white border border-zinc-700 text-xs focus:outline-none focus:border-brand-orange">
-                </div>
-                <div>
-                    <label class="block text-xs text-gray-400 mb-1">Количество гостей</label>
-                    <input type="number" min="1" max="20" value="2" class="w-full px-4 py-2.5 rounded bg-zinc-800 text-white border border-zinc-700 text-xs focus:outline-none focus:border-brand-orange">
-                </div>
-                <button type="submit" class="w-full bg-brand-orange hover:bg-brand-darkOrange text-white text-xs font-bold uppercase py-3.5 rounded transition mt-4">
-                    Забронировать
-                </button>
-            </form>
-        </div>
+      </div>
     </div>
+  </section>
 
-    <!-- Shopping Cart Modal -->
-    <div id="cart-modal" class="fixed inset-0 bg-black/70 backdrop-blur-sm z-50 hidden items-center justify-center p-4">
-        <div class="bg-white text-gray-800 rounded-lg p-6 max-w-md w-full relative shadow-2xl">
-            <button onclick="closeCartModal()" class="absolute top-4 right-4 text-gray-400 hover:text-gray-700 text-xl">
-                <i class="fa-solid fa-xmark"></i>
-            </button>
-            <h3 class="text-xl font-serif font-bold text-gray-900 mb-4 flex items-center">
-                <i class="fa-solid fa-cart-shopping text-brand-orange mr-2"></i> Ваша корзина
-            </h3>
-            
-            <div id="cart-items-list" class="max-h-60 overflow-y-auto space-y-3 mb-4 divide-y divide-gray-100">
-                <p class="text-xs text-gray-500 py-4 text-center">Корзина пуста. Выберите блюда из меню!</p>
-            </div>
-
-            <div class="border-t border-gray-200 pt-4 flex justify-between items-center mb-6">
-                <span class="font-bold text-sm">Итого:</span>
-                <span id="cart-total-price" class="text-lg font-serif font-bold text-brand-orange">0 ₽</span>
-            </div>
-
-            <button onclick="checkoutCart()" class="w-full bg-brand-orange hover:bg-brand-darkOrange text-white text-xs font-bold uppercase py-3.5 rounded transition">
-                Оформить заказ
-            </button>
+  <!-- ПОЧЕМУ МЫ -->
+  <section class="py-16 bg-gray-50">
+    <div class="max-w-7xl mx-auto px-4">
+      <h2 class="text-2xl md:text-3xl font-bold text-center text-gray-800 mb-12">Почему мы</h2>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+        
+        <div class="bg-white p-8 rounded-2xl card-shadow relative overflow-hidden">
+          <h3 class="text-xl font-bold text-gray-800 mb-4">Преподаватели</h3>
+          <p class="text-sm text-gray-600 leading-relaxed">
+            Наши преподаватели имеют многолетний опыт в сфере косметологии и совмещают преподавательскую деятельность с практической работой.
+          </p>
+          <span class="number-bg text-gray-300">01</span>
         </div>
+
+        <div class="bg-brandLightBg p-8 rounded-2xl card-shadow relative overflow-hidden">
+          <h3 class="text-xl font-bold text-gray-800 mb-4">Сертификаты</h3>
+          <p class="text-sm text-gray-600 leading-relaxed">
+            Удостоверение, сертификат и свидетельство, полученные у нас по окончанию курсов, работают как лучшая рекомендация при приеме на работу.
+          </p>
+          <span class="number-bg text-brandGreen">02</span>
+        </div>
+
+        <div class="bg-white p-8 rounded-2xl card-shadow relative overflow-hidden">
+          <h3 class="text-xl font-bold text-gray-800 mb-4">Повышение квалификации</h3>
+          <p class="text-sm text-gray-600 leading-relaxed">
+            Ежегодно больше 2000 косметологов повышают квалификацию и уровень профессионализма в просторных кабинетах нашего центра.
+          </p>
+          <span class="number-bg text-gray-300">03</span>
+        </div>
+
+      </div>
     </div>
+  </section>
 
-    <!-- JavaScript Interactions -->
-    <script>
-        /* Mobile Menu Toggle */
-        const mobileMenuBtn = document.getElementById('mobile-menu-btn');
-        const mobileMenu = document.getElementById('mobile-menu');
+  <!-- АКЦИИ -->
+  <section id="promos" class="py-16 bg-white">
+    <div class="max-w-7xl mx-auto px-4">
+      <h2 class="text-2xl md:text-3xl font-bold text-center text-gray-800 mb-12">Специальные предложения</h2>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+        <div class="rounded-2xl overflow-hidden shadow-lg border border-gray-100 flex flex-col">
+          <img src="images/promo-1.jpg" alt="Акция 1" class="w-full h-56 object-cover">
+          <div class="p-6 bg-white flex-1 flex flex-col justify-between">
+            <h3 class="font-bold text-gray-800 mb-2">Скидка на препараты</h3>
+            <button onclick="openModal('Акция -15% / -20%')" class="w-full py-2 bg-brandGreen text-white font-semibold rounded hover:bg-brandGreenHover transition">Подробнее</button>
+          </div>
+        </div>
 
-        mobileMenuBtn.addEventListener('click', () => {
-            mobileMenu.classList.toggle('hidden');
-        });
+        <div class="rounded-2xl overflow-hidden shadow-lg border border-gray-100 flex flex-col">
+          <img src="images/promo-2.jpg" alt="Акция 2" class="w-full h-56 object-cover">
+          <div class="p-6 bg-white flex-1 flex flex-col justify-between">
+            <h3 class="font-bold text-gray-800 mb-2">Акция на комплекты</h3>
+            <button onclick="openModal('Акция -10% / -15%')" class="w-full py-2 bg-brandGreen text-white font-semibold rounded hover:bg-brandGreenHover transition">Подробнее</button>
+          </div>
+        </div>
 
-        /* Modals Control */
-        function openBookingModal() {
-            document.getElementById('booking-modal').classList.add('modal-active');
-        }
+        <div class="rounded-2xl overflow-hidden shadow-lg border border-gray-100 flex flex-col">
+          <img src="images/promo-3.jpg" alt="Акция 3" class="w-full h-56 object-cover">
+          <div class="p-6 bg-white flex-1 flex flex-col justify-between">
+            <h3 class="font-bold text-gray-800 mb-2">Акция MEDIFEEL -25%</h3>
+            <button onclick="openModal('Акция MEDIFEEL -25%')" class="w-full py-2 bg-brandGreen text-white font-semibold rounded hover:bg-brandGreenHover transition">Подробнее</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
 
-        function closeBookingModal() {
-            document.getElementById('booking-modal').classList.remove('modal-active');
-        }
+  <!-- ФОРМА ОБРАТНОЙ СВЯЗИ -->
+  <section id="callback" class="py-16 bg-gray-50">
+    <div class="max-w-xl mx-auto px-4 bg-white p-8 md:p-12 rounded-2xl card-shadow text-center">
+      <h2 class="text-2xl font-bold text-brandGreen mb-2">Закажите обратный звонок</h2>
+      <p class="text-xs text-gray-500 mb-8">Оставьте заявку в форме и наш менеджер свяжется с вами</p>
+      
+      <form onsubmit="handleCallback(event)" class="space-y-4">
+        <input type="text" placeholder="Ваше имя" required class="w-full px-4 py-3 border border-gray-200 rounded-lg text-sm focus:outline-none focus:border-brandGreen">
+        <input type="tel" placeholder="Ваш номер телефона" required class="w-full px-4 py-3 border border-gray-200 rounded-lg text-sm focus:outline-none focus:border-brandGreen">
+        <button type="submit" class="w-full bg-brandGreen hover:bg-brandGreenHover text-white font-bold py-3 rounded-lg shadow transition">Отправить</button>
+      </form>
+    </div>
+  </section>
 
-        function openCartModal() {
-            document.getElementById('cart-modal').classList.add('modal-active');
-        }
+  <!-- ПОДВАЛ -->
+  <footer class="bg-gray-800 text-gray-300">
+    <div class="grid grid-cols-1 lg:grid-cols-2">
+      <!-- Карта -->
+      <div class="h-80 lg:h-auto bg-gray-700 relative flex items-center justify-center text-gray-400">
+        <iframe src="https://maps.google.com/maps?q=Kharkiv,%20Klochkivska%20St,%203&t=&z=13&ie=UTF8&iwloc=&output=embed" class="w-full h-full border-0" allowfullscreen="" loading="lazy"></iframe>
+      </div>
 
-        function closeCartModal() {
-            document.getElementById('cart-modal').classList.remove('modal-active');
-        }
+      <!-- Контакты -->
+      <div class="p-8 lg:p-16 flex flex-col justify-between">
+        <div>
+          <div class="flex items-center gap-3 mb-6">
+            <div class="w-12 h-12 rounded-full bg-brandGreen text-white font-bold flex items-center justify-center text-sm">
+              ValMari
+            </div>
+          </div>
+          <div class="text-2xl font-bold text-white mb-2">0 (800) 508-622</div>
+          <div class="text-sm text-gray-400 mb-8">Харьков, Клочковская, д. 3</div>
 
-        function handleBookingSubmit(e) {
-            e.preventDefault();
-            alert('Спасибо! Ваша заявка на бронирование принята. Мы свяжемся с вами в ближайшее время.');
-            closeBookingModal();
-        }
+          <div class="grid grid-cols-2 gap-4 text-xs text-gray-400 mb-8">
+            <a href="#courses" class="hover:text-white transition">Курсы обучения</a>
+            <a href="#promos" class="hover:text-white transition">Акции</a>
+            <a href="#webinars" class="hover:text-white transition">Вебинары</a>
+            <a href="#about" class="hover:text-white transition">О нас</a>
+            <a href="#videos" class="hover:text-white transition">Видео-уроки</a>
+            <a href="#about" class="hover:text-white transition">Блог</a>
+            <a href="#courses" class="hover:text-white transition">Прайс</a>
+            <a href="#callback" class="hover:text-white transition">Магазин</a>
+            <a href="#masterclasses" class="hover:text-white transition">Расписание</a>
+          </div>
 
-        /* Cart State Management */
-        let cart = [];
+          <div class="flex gap-4 text-lg">
+            <a href="#" class="w-10 h-10 rounded-full bg-gray-700 flex items-center justify-center text-white hover:bg-brandGreen transition"><i class="fa-brands fa-facebook-f"></i></a>
+            <a href="#" class="w-10 h-10 rounded-full bg-gray-700 flex items-center justify-center text-white hover:bg-brandGreen transition"><i class="fa-brands fa-instagram"></i></a>
+          </div>
+        </div>
 
-        function addToCart(title, price) {
-            const existing = cart.find(item => item.title === title);
-            if (existing) {
-                existing.quantity += 1;
-            } else {
-                cart.push({ title, price, quantity: 1 });
-            }
-            updateCartUI();
-            
-            // Brief notification
-            const cartBtn = document.querySelector('.fa-cart-shopping');
-            if (cartBtn) {
-                cartBtn.classList.add('scale-125', 'text-brand-orange');
-                setTimeout(() => cartBtn.classList.remove('scale-125', 'text-brand-orange'), 300);
-            }
-        }
+        <div class="text-xs text-gray-500 mt-12">
+          Политика конфиденциальности
+        </div>
+      </div>
+    </div>
+  </footer>
 
-        function updateCartUI() {
-            const countBadges = document.querySelectorAll('#cart-count');
-            const totalCount = cart.reduce((sum, item) => sum + item.quantity, 0);
-            
-            countBadges.forEach(badge => badge.textContent = totalCount);
+  <!-- МОДАЛЬНОЕ ОКНО -->
+  <div id="modal" class="fixed inset-0 bg-black/60 z-50 hidden flex items-center justify-center p-4">
+    <div class="bg-white rounded-2xl max-w-md w-full p-8 relative shadow-2xl">
+      <button onclick="closeModal()" class="absolute top-4 right-4 text-gray-400 hover:text-gray-600 text-xl">&times;</button>
+      <h3 id="modalTitle" class="text-xl font-bold text-brandGreen mb-2">Запись на курс</h3>
+      <p class="text-xs text-gray-500 mb-6">Оставьте контакты и наш администратор свяжется с вами</p>
+      
+      <form onsubmit="handleModalSubmit(event)" class="space-y-4">
+        <input type="text" placeholder="Ваше имя" required class="w-full px-4 py-3 border border-gray-200 rounded-lg text-sm focus:outline-none focus:border-brandGreen">
+        <input type="tel" placeholder="Номер телефона" required class="w-full px-4 py-3 border border-gray-200 rounded-lg text-sm focus:outline-none focus:border-brandGreen">
+        <button type="submit" class="w-full bg-brandGreen hover:bg-brandGreenHover text-white font-bold py-3 rounded-lg transition">Записаться</button>
+      </form>
+    </div>
+  </div>
 
-            const cartList = document.getElementById('cart-items-list');
-            const totalPriceEl = document.getElementById('cart-total-price');
+  <script>
+    const mobileBtn = document.getElementById('mobileMenuBtn');
+    const mainNav = document.getElementById('mainNav');
+    mobileBtn.addEventListener('click', () => {
+      mainNav.classList.toggle('hidden');
+    });
 
-            if (cart.length === 0) {
-                cartList.innerHTML = '<p class="text-xs text-gray-500 py-4 text-center">Корзина пуста. Выберите блюда из меню!</p>';
-                totalPriceEl.textContent = '0 ₽';
-                return;
-            }
+    function openModal(title) {
+      document.getElementById('modalTitle').textContent = title;
+      document.getElementById('modal').classList.remove('hidden');
+    }
 
-            let total = 0;
-            cartList.innerHTML = cart.map(item => {
-                const itemTotal = item.price * item.quantity;
-                total += itemTotal;
-                return `
-                    <div class="flex justify-between items-center pt-2 text-xs">
-                        <div>
-                            <span class="font-semibold text-gray-800">${item.title}</span>
-                            <span class="text-gray-400 block">${item.price} ₽ x ${item.quantity}</span>
-                        </div>
-                        <span class="font-bold text-amber-700">${itemTotal} ₽</span>
-                    </div>
-                `;
-            }).join('');
+    function closeModal() {
+      document.getElementById('modal').classList.add('hidden');
+    }
 
-            totalPriceEl.textContent = `${total} ₽`;
-        }
+    function handleCallback(e) {
+      e.preventDefault();
+      alert('Спасибо! Мы свяжемся с вами в ближайшее время.');
+      e.target.reset();
+    }
 
-        function checkoutCart() {
-            if (cart.length === 0) {
-                alert('Ваша корзина пуста!');
-                return;
-            }
-            alert('Ваш заказ оформлен! Менеджер свяжется с вами для подтверждения.');
-            cart = [];
-            updateCartUI();
-            closeCartModal();
-        }
-
-        /* Testimonials Slider */
-        const testimonials = [
-            {
-                quote: `"Я надолго запомню мой День рождения, проведённый в этом ресторане! Кусочек родной Армении!!! Отдельное спасибо за комплемент в виде фруктовой тарелки. Будем рекомендовать этот ресторан своим друзьям и родственникам также за рубежом, путешествующих в Санкт-Петербург!!"`,
-                avatar: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=150&q=80",
-                role: "Посетитель",
-                name: "Николай"
-            },
-            {
-                quote: `"Изумительная кухня и невероятная атмосфера! Очень понравился Гамбургер макси и фирменная пицца. Обслуживание на высшем уровне, обязательно вернемся всей семьей."`,
-                avatar: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=150&q=80",
-                role: "Посетитель",
-                name: "Екатерина"
-            },
-            {
-                quote: `"Прекрасный уютный ресторан в центре города. Приемлемые цены и огромные порции! Рекомендую бронировать столики заранее."`,
-                avatar: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=150&q=80",
-                role: "Посетитель",
-                name: "Александр"
-            }
-        ];
-
-        function switchTestimonial(index) {
-            const data = testimonials[index];
-            document.getElementById('testimonial-quote').textContent = data.quote;
-            document.getElementById('testimonial-avatar').src = data.avatar;
-            document.getElementById('testimonial-role').textContent = data.role;
-            document.getElementById('testimonial-name').textContent = data.name;
-
-            const dots = document.querySelectorAll('.dot-btn');
-            dots.forEach((dot, i) => {
-                if (i === index) {
-                    dot.className = "dot-btn w-2.5 h-2.5 rounded-full bg-brand-orange transition-all";
-                } else {
-                    dot.className = "dot-btn w-2.5 h-2.5 rounded-full bg-gray-400 hover:bg-gray-600 transition-all";
-                }
-            });
-        }
-    </script>
+    function handleModalSubmit(e) {
+      e.preventDefault();
+      alert('Заявка успешно отправлена!');
+      closeModal();
+      e.target.reset();
+    }
+  </script>
 </body>
 </html>
