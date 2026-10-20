@@ -1,518 +1,291 @@
 <!DOCTYPE html>
-<html lang="ru">
+<html lang="ru" class="scroll-smooth">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>ValMari — Учебный центр эстетической косметологии</title>
-  <script src="https://cdn.tailwindcss.com"></script>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-  <script>
-    tailwind.config = {
-      theme: {
-        extend: {
-          colors: {
-            brandGreen: '#52B030',
-            brandGreenHover: '#439327',
-            brandLightBg: '#E9F7E8',
-            brandPurple: '#4A3B9F',
-            brandPurpleHover: '#3A2E80',
-            brandTeal: '#00B09B'
-          }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Елдос | Full-Stack Web Developer & Geass Creator</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        geassRed: '#ff003c',
+                        geassPurple: '#3b0066',
+                        geassDark: '#08050f',
+                        geassCard: '#130c22',
+                        geassGold: '#ffd700'
+                    }
+                }
+            }
         }
-      }
-    }
-  </script>
-  <style>
-    html { scroll-behavior: smooth; }
-    .card-shadow { box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.08); }
-    .number-bg { font-size: 8rem; line-height: 1; opacity: 0.15; position: absolute; right: 1rem; bottom: -0.5rem; font-weight: 800; }
-  </style>
+    </script>
+    <style>
+        @keyframes geass-pulse {
+            0%, 100% { box-shadow: 0 0 15px rgba(255, 0, 60, 0.4), inset 0 0 15px rgba(255, 0, 60, 0.2); }
+            50% { box-shadow: 0 0 35px rgba(255, 0, 60, 0.8), inset 0 0 25px rgba(255, 0, 60, 0.4); }
+        }
+        @keyframes float-sigil {
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            50% { transform: translateY(-10px) rotate(3deg); }
+        }
+        .geass-glow {
+            animation: geass-pulse 3s infinite;
+        }
+        .floating {
+            animation: float-sigil 6s ease-in-out infinite;
+        }
+        body {
+            background-color: #08050f;
+            color: #e2e8f0;
+            font-family: system-ui, -apple-system, sans-serif;
+        }
+    </style>
 </head>
-<body class="font-sans text-gray-800 bg-white">
+<body class="bg-geassDark text-gray-200 selection:bg-geassRed selection:text-white">
 
-  <!-- ШАПКА И НАВИГАЦИЯ -->
-  <header class="border-b border-gray-100 bg-white sticky top-0 z-40 shadow-sm">
-    <div class="max-w-7xl mx-auto px-4 py-3 flex items-center justify-between">
-      
-      <!-- Логотип -->
-      <a href="#" class="flex items-center gap-3">
-        <div class="w-12 h-12 rounded-full bg-brandLightBg border-2 border-brandGreen flex items-center justify-center font-bold text-brandGreen text-sm">
-          ValMari
-        </div>
-        <div class="text-xs text-gray-600 font-medium hidden sm:block">
-          Учебный центр<br><span class="font-normal text-gray-400">эстетической косметологии</span>
-        </div>
-      </a>
-
-      <!-- Контакты и Язык -->
-      <div class="flex items-center gap-6">
-        <a href="tel:0800508622" class="flex items-center gap-2 text-gray-800 font-bold hover:text-brandGreen transition">
-          <i class="fa-solid fa-phone text-brandGreen text-lg"></i>
-          <span class="text-sm md:text-base">0 (800) 508-622</span>
-        </a>
-        <div class="hidden md:flex items-center gap-3 text-lg">
-          <a href="#" class="w-8 h-8 rounded-full bg-brandGreen text-white flex items-center justify-center hover:bg-brandGreenHover transition"><i class="fa-brands fa-facebook-f text-sm"></i></a>
-          <a href="#" class="w-8 h-8 rounded-full bg-brandGreen text-white flex items-center justify-center hover:bg-brandGreenHover transition"><i class="fa-brands fa-instagram text-sm"></i></a>
-        </div>
-        <div class="flex items-center gap-1 cursor-pointer text-sm border border-gray-200 rounded px-2 py-1">
-          <span class="w-5 h-3 bg-blue-600 block relative overflow-hidden rounded-sm"><span class="bg-red-600 h-1/3 block absolute bottom-0 w-full"></span><span class="bg-white h-1/3 block absolute top-0 w-full"></span></span>
-          <i class="fa-solid fa-chevron-down text-xs text-gray-400 ml-1"></i>
-        </div>
-        
-        <!-- Кнопка мобильного меню -->
-        <button id="mobileMenuBtn" class="lg:hidden text-2xl text-gray-700">
-          <i class="fa-solid fa-bars"></i>
-        </button>
-      </div>
-    </div>
-
-    <!-- МЕНЮ НАВИГАЦИИ -->
-    <nav id="mainNav" class="hidden lg:block border-t border-gray-100 bg-white">
-      <div class="max-w-7xl mx-auto px-4 flex flex-col lg:flex-row items-center justify-between text-sm py-2 lg:py-0 font-medium text-gray-600 gap-4 lg:gap-0">
-        <a href="#courses" class="py-3 hover:text-brandGreen border-b-2 border-transparent hover:border-brandGreen transition">Курсы обучения</a>
-        <a href="#webinars" class="py-3 hover:text-brandGreen border-b-2 border-transparent hover:border-brandGreen transition">Вебинары</a>
-        <a href="#videos" class="py-3 hover:text-brandGreen border-b-2 border-transparent hover:border-brandGreen transition">Видео-уроки</a>
-        <a href="#about" class="py-3 hover:text-brandGreen border-b-2 border-transparent hover:border-brandGreen transition">Блог</a>
-        <a href="#about" class="py-3 hover:text-brandGreen border-b-2 border-transparent hover:border-brandGreen transition">О нас</a>
-        <a href="#courses" class="py-3 hover:text-brandGreen border-b-2 border-transparent hover:border-brandGreen transition">Прайс</a>
-        <a href="#masterclasses" class="py-3 hover:text-brandGreen border-b-2 border-transparent hover:border-brandGreen transition">Расписание</a>
-        <a href="#promos" class="py-3 hover:text-brandGreen border-b-2 border-transparent hover:border-brandGreen transition">Акции</a>
-        <a href="#callback" class="py-3 hover:text-brandGreen border-b-2 border-transparent hover:border-brandGreen transition">Магазин</a>
-      </div>
-    </nav>
-  </header>
-
-  <!-- ГЛАВНЫЙ ЭКРАН (HERO) -->
-  <section id="webinars" class="bg-brandLightBg relative overflow-hidden py-12 md:py-20">
-    <div class="max-w-7xl mx-auto px-4 grid grid-cols-1 lg:grid-cols-2 items-center gap-8">
-      <div>
-        <p class="text-gray-700 font-medium mb-2 text-base md:text-lg">Бесплатный вебинар</p>
-        <h1 class="text-3xl md:text-5xl lg:text-6xl font-extrabold text-brandGreen tracking-tight leading-tight mb-4">
-          ПРОФЕССИЯ<br>КОСМЕТОЛОГ
-        </h1>
-        <p class="text-gray-600 text-base md:text-lg mb-8 max-w-lg">
-          Приглашаем на бесплатный вебинар для профессиональных косметологов и интересующихся этой профессией
-        </p>
-        <div class="flex flex-wrap gap-4">
-          <button onclick="openModal('Бесплатный вебинар ПРОФЕССИЯ КОСМЕТОЛОГ')" class="bg-brandGreen hover:bg-brandGreenHover text-white font-semibold px-8 py-4 rounded shadow-lg transition">
-            Зарегистрироваться
-          </button>
-          <a href="#about" class="border border-brandGreen text-brandGreen font-semibold px-8 py-4 rounded hover:bg-white transition flex items-center justify-center">
-            Узнать подробнее
-          </a>
-        </div>
-      </div>
-      <div class="relative flex justify-center lg:justify-end">
-        <img src="images/hero-doctors.jpg" alt="Косметологи ValMari" class="rounded-2xl object-cover shadow-xl max-h-[450px] w-full lg:w-4/5">
-      </div>
-    </div>
-  </section>
-
-  <!-- СТАТИСТИКА -->
-  <section class="py-10 bg-white border-b border-gray-100">
-    <div class="max-w-7xl mx-auto px-4 grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
-      <div>
-        <div class="text-3xl md:text-4xl font-extrabold text-brandGreen">4000+</div>
-        <div class="text-xs md:text-sm text-gray-500 mt-1">Сертификатов мы выдали</div>
-      </div>
-      <div>
-        <div class="text-3xl md:text-4xl font-extrabold text-brandGreen">3500+</div>
-        <div class="text-xs md:text-sm text-gray-500 mt-1">Моделей в нашей базе</div>
-      </div>
-      <div>
-        <div class="text-3xl md:text-4xl font-extrabold text-brandGreen">1500+</div>
-        <div class="text-xs md:text-sm text-gray-500 mt-1">Специалистов мы обучили</div>
-      </div>
-      <div>
-        <div class="text-3xl md:text-4xl font-extrabold text-brandGreen">5500+</div>
-        <div class="text-xs md:text-sm text-gray-500 mt-1">Довольных клиентов</div>
-      </div>
-    </div>
-  </section>
-
-  <!-- КУРСЫ ОБУЧЕНИЯ -->
-  <section id="courses" class="py-16 bg-white">
-    <div class="max-w-7xl mx-auto px-4">
-      <h2 class="text-2xl md:text-3xl font-bold text-center text-gray-800 mb-12">Курсы обучения</h2>
-      
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-        <!-- Карточка 1 -->
-        <div class="border border-gray-100 rounded-2xl overflow-hidden card-shadow flex flex-col justify-between bg-white">
-          <div class="p-6">
-            <div class="flex justify-between items-center mb-4">
-              <span class="text-xs text-gray-400 font-medium">Курс для медиков</span>
-              <i class="fa-solid fa-dove text-brandGreen text-lg"></i>
-            </div>
-            <h3 class="text-xl font-bold text-brandPurple mb-3">Канюльные техники</h3>
-            <span class="inline-block bg-brandPurple text-white text-xs font-semibold px-4 py-1 rounded-full mb-4">Оффлайн</span>
-            <div class="text-sm font-semibold text-gray-700 mb-4">1 - 4 мая</div>
+    <!-- HEADER / NAVIGATION -->
+    <header class="fixed top-0 left-0 right-0 z-50 bg-geassDark/80 backdrop-blur-md border-b border-geassRed/20">
+        <div class="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
+            <a href="#" class="flex items-center gap-3 group">
+                <div class="w-10 h-10 rounded-full bg-geassRed/10 border-2 border-geassRed flex items-center justify-center geass-glow group-hover:rotate-180 transition duration-700">
+                    <span class="text-geassRed font-bold text-lg">👁️</span>
+                </div>
+                <span class="text-xl font-black tracking-widest text-white uppercase font-mono">ELDOS<span class="text-geassRed">.GEASS</span></span>
+            </a>
             
-            <div class="flex items-center gap-4 mb-4">
-              <ul class="text-xs text-gray-500 space-y-1 w-1/2">
-                <li>• Краткое описание</li>
-                <li>• Что-то о курсе</li>
-                <li>• Пару фактов</li>
-                <li>• Краткое описание</li>
-              </ul>
-              <img src="images/course-model.jpg" alt="Модель" class="w-1/2 h-24 object-contain">
-            </div>
-          </div>
-          <div>
-            <div class="px-6 py-2 text-xs text-gray-400 font-medium">Свободно 2 из 15 мест</div>
-            <button onclick="openModal('Курс: Канюльные техники')" class="w-full py-3 bg-brandPurple hover:bg-brandPurpleHover text-white font-semibold transition">Зарегистрироваться</button>
-            <button class="w-full py-2 bg-purple-50 text-brandPurple text-xs font-semibold hover:bg-purple-100 transition">Подробнее</button>
-          </div>
-        </div>
+            <nav class="hidden md:flex items-center gap-8 text-sm font-medium">
+                <a href="#about" class="hover:text-geassRed transition">О себе</a>
+                <a href="#skills" class="hover:text-geassRed transition">Навыки</a>
+                <a href="#projects" class="hover:text-geassRed transition">Проекты</a>
+                <a href="#contact" class="hover:text-geassRed transition">Связаться</a>
+            </nav>
 
-        <!-- Карточка 2 -->
-        <div class="border border-gray-100 rounded-2xl overflow-hidden card-shadow flex flex-col justify-between bg-white">
-          <div class="p-6">
-            <div class="flex justify-between items-center mb-4">
-              <span class="text-xs text-gray-400 font-medium">Курс для медиков</span>
-              <i class="fa-solid fa-dove text-brandGreen text-lg"></i>
-            </div>
-            <h3 class="text-xl font-bold text-brandGreen mb-3">Мезотерапия и биоревитализация</h3>
-            <span class="inline-block bg-brandGreen text-white text-xs font-semibold px-4 py-1 rounded-full mb-4">Онлайн</span>
-            <div class="text-sm font-semibold text-gray-700 mb-4">15 - 20 мая</div>
-            
-            <div class="flex items-center gap-4 mb-4">
-              <ul class="text-xs text-gray-500 space-y-1 w-1/2">
-                <li>• Краткое описание</li>
-                <li>• Что-то о курсе</li>
-                <li>• Пару фактов</li>
-                <li>• Краткое описание</li>
-              </ul>
-              <img src="images/course-model.jpg" alt="Модель" class="w-1/2 h-24 object-contain">
-            </div>
-          </div>
-          <div>
-            <div class="px-6 py-2 text-xs text-gray-400 font-medium">Свободно 2 из 15 мест</div>
-            <button onclick="openModal('Курс: Мезотерапия')" class="w-full py-3 bg-brandGreen hover:bg-brandGreenHover text-white font-semibold transition">Зарегистрироваться</button>
-            <button class="w-full py-2 bg-brandLightBg text-brandGreen text-xs font-semibold hover:bg-green-100 transition">Подробнее</button>
-          </div>
+            <a href="#contact" class="hidden sm:inline-block px-5 py-2.5 rounded-full bg-gradient-to-r from-geassRed to-geassPurple text-white font-semibold text-sm shadow-lg shadow-geassRed/30 hover:shadow-geassRed/60 transition transform hover:-translate-y-0.5">
+                Заказать сайт
+            </a>
         </div>
+    </header>
 
-        <!-- Карточка 3 -->
-        <div class="border border-gray-100 rounded-2xl overflow-hidden card-shadow flex flex-col justify-between bg-white">
-          <div class="p-6">
-            <div class="flex justify-between items-center mb-4">
-              <span class="text-xs text-gray-400 font-medium">Курс для медиков</span>
-              <i class="fa-solid fa-dove text-brandGreen text-lg"></i>
-            </div>
-            <h3 class="text-xl font-bold text-teal-600 mb-3">Биогель - новое в косметологии</h3>
-            <span class="inline-block bg-teal-500 text-white text-xs font-semibold px-4 py-1 rounded-full mb-4">Мастер-класс</span>
-            <div class="text-sm font-semibold text-gray-700 mb-4">2 - 5 августа</div>
-            
-            <div class="flex items-center gap-4 mb-4">
-              <ul class="text-xs text-gray-500 space-y-1 w-1/2">
-                <li>• Краткое описание</li>
-                <li>• Что-то о курсе</li>
-                <li>• Пару фактов</li>
-                <li>• Краткое описание</li>
-              </ul>
-              <img src="images/course-model.jpg" alt="Модель" class="w-1/2 h-24 object-contain">
-            </div>
-          </div>
-          <div>
-            <div class="px-6 py-2 text-xs text-gray-400 font-medium">Свободно 2 из 15 мест</div>
-            <button onclick="openModal('Курс: Биогель')" class="w-full py-3 bg-teal-500 hover:bg-teal-600 text-white font-semibold transition">Зарегистрироваться</button>
-            <button class="w-full py-2 bg-teal-50 text-teal-600 text-xs font-semibold hover:bg-teal-100 transition">Подробнее</button>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
+    <!-- HERO SECTION -->
+    <section class="min-h-screen pt-32 pb-16 flex items-center relative overflow-hidden">
+        <!-- Background Geass Sigil Elements -->
+        <div class="absolute top-1/4 left-10 w-96 h-96 bg-geassRed/5 rounded-full blur-3xl pointer-events-none"></div>
+        <div class="absolute bottom-10 right-10 w-[500px] h-[500px] bg-geassPurple/10 rounded-full blur-3xl pointer-events-none"></div>
 
-  <!-- О НАС -->
-  <section id="about" class="py-16 bg-gray-50">
-    <div class="max-w-7xl mx-auto px-4 grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-      <div class="rounded-2xl overflow-hidden shadow-lg">
-        <img src="images/about-center.jpg" alt="Учебный центр ValMari" class="w-full h-[400px] object-cover">
-      </div>
-      <div>
-        <span class="text-sm text-gray-400 uppercase tracking-widest font-semibold">О нас</span>
-        <h2 class="text-2xl md:text-3xl font-extrabold text-gray-800 mt-2 mb-6">
-          <span class="text-brandGreen">VALMARI</span> ВЕДУЩИЙ УЧЕБНЫЙ ЦЕНТР ЭСТЕТИЧЕСКОЙ КОСМЕТОЛОГИИ
-        </h2>
-        <p class="text-gray-600 mb-4 leading-relaxed">Описание может быть любое. Ведущий учебный центр эстетической косметологии.</p>
-        <p class="text-gray-600 mb-8 leading-relaxed">
-          Более 5 лет мы проводим сертифицированные курсы профессионального образования в области косметологии и индустрии красоты, здоровья и молодости.
-        </p>
-        <a href="#courses" class="inline-flex items-center gap-2 text-brandGreen font-bold hover:underline">
-          Подробнее <i class="fa-solid fa-arrow-right"></i>
-        </a>
-      </div>
-    </div>
-  </section>
-
-  <!-- ОБУЧЕНИЕ КОСМЕТОЛОГОВ (ПЛИТКИ) -->
-  <section class="py-16 bg-white">
-    <div class="max-w-7xl mx-auto px-4">
-      <h2 class="text-2xl md:text-3xl font-bold text-center text-gray-800 mb-12">Обучение косметологов</h2>
-      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-        <div class="relative rounded-xl overflow-hidden h-48 group cursor-pointer shadow-md">
-          <img src="images/tile-courses.jpg" class="w-full h-full object-cover group-hover:scale-105 transition duration-300">
-          <div class="absolute inset-0 bg-black/40 flex flex-col justify-end p-6 text-white">
-            <h3 class="text-xl font-bold">КУРСЫ КОСМЕТОЛОГИИ</h3>
-            <p class="text-xs text-gray-200 mt-1">• эстетическая • инъекционная • лазерная</p>
-          </div>
-        </div>
-        <div class="relative rounded-xl overflow-hidden h-48 group cursor-pointer shadow-md">
-          <img src="images/tile-online.jpg" class="w-full h-full object-cover group-hover:scale-105 transition duration-300">
-          <div class="absolute inset-0 bg-black/40 flex items-end p-6 text-white">
-            <h3 class="text-xl font-bold">ОНЛАЙН ОБУЧЕНИЕ</h3>
-          </div>
-        </div>
-        <div class="relative rounded-xl overflow-hidden h-48 group cursor-pointer shadow-md">
-          <img src="images/tile-masterclass.jpg" class="w-full h-full object-cover group-hover:scale-105 transition duration-300">
-          <div class="absolute inset-0 bg-black/40 flex items-end p-6 text-white">
-            <h3 class="text-xl font-bold">МАСТЕР-КЛАССЫ</h3>
-          </div>
-        </div>
-        <div class="relative rounded-xl overflow-hidden h-48 group cursor-pointer shadow-md">
-          <img src="images/tile-schedule.jpg" class="w-full h-full object-cover group-hover:scale-105 transition duration-300">
-          <div class="absolute inset-0 bg-black/40 flex items-end p-6 text-white">
-            <h3 class="text-xl font-bold">РАСПИСАНИЕ</h3>
-          </div>
-        </div>
-        <div class="relative rounded-xl overflow-hidden h-48 group cursor-pointer shadow-md">
-          <img src="images/tile-promos.jpg" class="w-full h-full object-cover group-hover:scale-105 transition duration-300">
-          <div class="absolute inset-0 bg-black/40 flex items-end p-6 text-white">
-            <h3 class="text-xl font-bold">АКЦИИ</h3>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ВЕДЕМ НАБОР МОДЕЛЕЙ -->
-  <section class="py-16 bg-gray-50">
-    <div class="max-w-7xl mx-auto px-4 grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-      <div>
-        <h2 class="text-2xl md:text-3xl font-extrabold text-brandGreen mb-6">ВЕДЕМ НАБОР МОДЕЛЕЙ</h2>
-        <p class="text-gray-600 mb-4">Мы предлагаем свои услуги для моделей.</p>
-        <p class="text-gray-600 mb-8">Выберите процедуру или несколько процедур и наш менеджер проконсультирует вас и назовет ближайшую дату, когда вы сможете получить эту процедуру.</p>
-        <button onclick="openModal('Заявка на роль модели')" class="bg-brandGreen hover:bg-brandGreenHover text-white font-bold px-8 py-4 rounded shadow-md transition">
-          Стать моделью
-        </button>
-      </div>
-      <div class="rounded-2xl overflow-hidden shadow-lg">
-        <img src="images/models-needed.jpg" alt="Набор моделей" class="w-full h-[350px] object-cover">
-      </div>
-    </div>
-  </section>
-
-  <!-- МАСТЕР-КЛАССЫ -->
-  <section id="masterclasses" class="py-16 bg-white">
-    <div class="max-w-7xl mx-auto px-4">
-      <h2 class="text-2xl md:text-3xl font-bold text-center text-gray-800 mb-2">Мастер-классы</h2>
-      <p class="text-gray-500 text-center mb-12">Мероприятия для повышения квалификации косметологов</p>
-
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-        <div class="border border-gray-100 rounded-xl overflow-hidden card-shadow flex flex-col md:flex-row">
-          <img src="images/masterclass-laser.jpg" class="w-full md:w-1/2 h-48 md:h-auto object-cover">
-          <div class="p-6 flex flex-col justify-between w-full md:w-1/2">
+        <div class="max-w-7xl mx-auto px-6 w-full grid grid-cols-1 lg:grid-cols-2 gap-12 items-center relative z-10">
             <div>
-              <div class="text-xs text-gray-400 mb-2">3 ноября, 10:00-12:00</div>
-              <h3 class="font-bold text-gray-800 text-sm mb-2">10 возможностей неодимового лазера. Лазерный пилинг, удаление тату/татуажа</h3>
-              <p class="text-xs text-gray-500 mb-4">Тренер: Юлия Щукина</p>
+                <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-geassRed/10 border border-geassRed/30 text-geassRed text-xs font-semibold mb-6">
+                    <span class="w-2 h-2 rounded-full bg-geassRed animate-ping"></span>
+                    Священная Британская Империя Кода
+                </div>
+                <h1 class="text-4xl sm:text-6xl font-black tracking-tight text-white mb-6 leading-tight">
+                    Я web-разработчик <br>из <span class="text-transparent bg-clip-text bg-gradient-to-r from-geassRed to-pink-500">Алматы</span>
+                </h1>
+                <p class="text-gray-400 text-lg mb-8 leading-relaxed max-w-xl">
+                    Объединяю абсолютную точность кода и эстетику аниме <span class="text-white font-semibold">Code Geass</span>. Создаю проекты, подчиняющие себе внимание с первого клика.
+                </p>
+                <div class="flex flex-wrap gap-4">
+                    <a href="#projects" class="px-8 py-4 rounded-xl bg-geassRed text-white font-bold shadow-lg shadow-geassRed/40 hover:bg-red-600 transition">
+                        Смотреть проекты
+                    </a>
+                    <a href="#about" class="px-8 py-4 rounded-xl bg-geassCard border border-geassRed/30 text-white font-bold hover:border-geassRed transition">
+                        Узнать больше
+                    </a>
+                </div>
             </div>
-            <div class="flex items-center justify-between pt-4 border-t border-gray-100">
-              <span class="font-bold text-brandGreen">2000 грн</span>
-              <button onclick="openModal('Мастер-класс: Неодимовый лазер')" class="w-10 h-10 rounded-full bg-brandGreen text-white flex items-center justify-center hover:bg-brandGreenHover transition">
-                <i class="fa-solid fa-arrow-right"></i>
-              </button>
-            </div>
-          </div>
-        </div>
 
-        <div class="border border-gray-100 rounded-xl overflow-hidden card-shadow flex flex-col md:flex-row">
-          <img src="images/masterclass-cosmetology.jpg" class="w-full md:w-1/2 h-48 md:h-auto object-cover">
-          <div class="p-6 flex flex-col justify-between w-full md:w-1/2">
+            <!-- PHOTO CONTAINER WITH GEASS EYE EFFECT -->
+            <div class="flex justify-center relative">
+                <div class="relative w-72 h-72 sm:w-96 sm:h-96 rounded-3xl p-2 bg-gradient-to-br from-geassRed via-geassPurple to-transparent geass-glow floating">
+                    <div class="w-full h-full rounded-2xl bg-geassCard overflow-hidden relative flex flex-col justify-center items-center">
+                        <!-- МЕТКА ДЛЯ ТВОЕГО ФОТО -->
+                        <img src="img/bestfriends.jpg" alt="Елдос" class="w-full h-full object-cover object-center relative z-10">
+                        
+                        <!-- Geass Badge Overlay -->
+                        <div class="absolute top-4 right-4 w-10 h-10 rounded-full bg-geassRed/90 backdrop-blur-md border border-white/40 flex items-center justify-center text-white z-20 shadow-lg shadow-geassRed">
+                            👁️
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ABOUT SECTION -->
+    <section id="about" class="py-24 bg-geassCard/50 border-y border-geassRed/10">
+        <div class="max-w-7xl mx-auto px-6 grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+            <div class="rounded-3xl overflow-hidden border border-geassRed/20 shadow-2xl p-2 bg-geassCard">
+                <!-- ВТОРАЯ МЕТКА ДЛЯ ТВОЕГО ФОТО -->
+                <img src="img/bestfriends.jpg" alt="Елдос" class="w-full h-[450px] object-cover rounded-2xl filter contrast-110">
+            </div>
             <div>
-              <div class="text-xs text-gray-400 mb-2">20 ноября, 12:00-17:00</div>
-              <h3 class="font-bold text-gray-800 text-sm mb-2">Профессия косметолог. Семинар для новичков и профессионалов</h3>
-              <p class="text-xs text-gray-500 mb-4">Спикеры: Марина Спивак, Алина Ядчишина</p>
+                <span class="text-geassRed font-mono text-sm tracking-widest uppercase">ОБО МНЕ</span>
+                <h2 class="text-3xl sm:text-4xl font-extrabold text-white mt-2 mb-6">
+                    Меня зовут <span class="text-geassRed">Елдос</span>
+                </h2>
+                <p class="text-gray-300 leading-relaxed mb-6">
+                    Я студент из Алматы, увлеченный веб-разработкой, программированием и созданием крутых цифровых продуктов. Моя цель — создавать быстрые, адаптивные и эстетичные сайты, которые вдохновляют пользователей.
+                </p>
+                <div class="grid grid-cols-2 gap-6">
+                    <div class="p-4 rounded-2xl bg-geassCard border border-geassRed/20">
+                        <div class="text-2xl font-bold text-geassRed mb-1">Full-Stack</div>
+                        <div class="text-xs text-gray-400">Frontend & Backend разработка</div>
+                    </div>
+                    <div class="p-4 rounded-2xl bg-geassCard border border-geassRed/20">
+                        <div class="text-2xl font-bold text-geassRed mb-1">Code Geass</div>
+                        <div class="text-xs text-gray-400">Эстетика и мощная логика</div>
+                    </div>
+                </div>
             </div>
-            <div class="flex items-center justify-between pt-4 border-t border-gray-100">
-              <span class="font-bold text-brandGreen">Бесплатно</span>
-              <button onclick="openModal('Мастер-класс: Профессия косметолог')" class="w-10 h-10 rounded-full bg-brandGreen text-white flex items-center justify-center hover:bg-brandGreenHover transition">
-                <i class="fa-solid fa-arrow-right"></i>
-              </button>
+        </div>
+    </section>
+
+    <!-- SKILLS SECTION -->
+    <section id="skills" class="py-24 max-w-7xl mx-auto px-6">
+        <div class="text-center max-w-2xl mx-auto mb-16">
+            <span class="text-geassRed font-mono text-sm tracking-widest uppercase">ТЕХНОЛОГИИ</span>
+            <h2 class="text-3xl sm:text-4xl font-extrabold text-white mt-2">Что я использую в работе</h2>
+        </div>
+
+        <div class="grid grid-cols-2 sm:grid-cols-4 gap-6">
+            <div class="p-6 rounded-2xl bg-geassCard border border-geassRed/20 text-center hover:border-geassRed transition group">
+                <div class="text-4xl mb-3 group-hover:scale-110 transition">🌐</div>
+                <h3 class="font-bold text-white mb-1">HTML5 / CSS3</h3>
+                <p class="text-xs text-gray-400">Адаптивная верстка</p>
             </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ПОЧЕМУ МЫ -->
-  <section class="py-16 bg-gray-50">
-    <div class="max-w-7xl mx-auto px-4">
-      <h2 class="text-2xl md:text-3xl font-bold text-center text-gray-800 mb-12">Почему мы</h2>
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-        
-        <div class="bg-white p-8 rounded-2xl card-shadow relative overflow-hidden">
-          <h3 class="text-xl font-bold text-gray-800 mb-4">Преподаватели</h3>
-          <p class="text-sm text-gray-600 leading-relaxed">
-            Наши преподаватели имеют многолетний опыт в сфере косметологии и совмещают преподавательскую деятельность с практической работой.
-          </p>
-          <span class="number-bg text-gray-300">01</span>
-        </div>
-
-        <div class="bg-brandLightBg p-8 rounded-2xl card-shadow relative overflow-hidden">
-          <h3 class="text-xl font-bold text-gray-800 mb-4">Сертификаты</h3>
-          <p class="text-sm text-gray-600 leading-relaxed">
-            Удостоверение, сертификат и свидетельство, полученные у нас по окончанию курсов, работают как лучшая рекомендация при приеме на работу.
-          </p>
-          <span class="number-bg text-brandGreen">02</span>
-        </div>
-
-        <div class="bg-white p-8 rounded-2xl card-shadow relative overflow-hidden">
-          <h3 class="text-xl font-bold text-gray-800 mb-4">Повышение квалификации</h3>
-          <p class="text-sm text-gray-600 leading-relaxed">
-            Ежегодно больше 2000 косметологов повышают квалификацию и уровень профессионализма в просторных кабинетах нашего центра.
-          </p>
-          <span class="number-bg text-gray-300">03</span>
-        </div>
-
-      </div>
-    </div>
-  </section>
-
-  <!-- АКЦИИ -->
-  <section id="promos" class="py-16 bg-white">
-    <div class="max-w-7xl mx-auto px-4">
-      <h2 class="text-2xl md:text-3xl font-bold text-center text-gray-800 mb-12">Специальные предложения</h2>
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-        <div class="rounded-2xl overflow-hidden shadow-lg border border-gray-100 flex flex-col">
-          <img src="images/promo-1.jpg" alt="Акция 1" class="w-full h-56 object-cover">
-          <div class="p-6 bg-white flex-1 flex flex-col justify-between">
-            <h3 class="font-bold text-gray-800 mb-2">Скидка на препараты</h3>
-            <button onclick="openModal('Акция -15% / -20%')" class="w-full py-2 bg-brandGreen text-white font-semibold rounded hover:bg-brandGreenHover transition">Подробнее</button>
-          </div>
-        </div>
-
-        <div class="rounded-2xl overflow-hidden shadow-lg border border-gray-100 flex flex-col">
-          <img src="images/promo-2.jpg" alt="Акция 2" class="w-full h-56 object-cover">
-          <div class="p-6 bg-white flex-1 flex flex-col justify-between">
-            <h3 class="font-bold text-gray-800 mb-2">Акция на комплекты</h3>
-            <button onclick="openModal('Акция -10% / -15%')" class="w-full py-2 bg-brandGreen text-white font-semibold rounded hover:bg-brandGreenHover transition">Подробнее</button>
-          </div>
-        </div>
-
-        <div class="rounded-2xl overflow-hidden shadow-lg border border-gray-100 flex flex-col">
-          <img src="images/promo-3.jpg" alt="Акция 3" class="w-full h-56 object-cover">
-          <div class="p-6 bg-white flex-1 flex flex-col justify-between">
-            <h3 class="font-bold text-gray-800 mb-2">Акция MEDIFEEL -25%</h3>
-            <button onclick="openModal('Акция MEDIFEEL -25%')" class="w-full py-2 bg-brandGreen text-white font-semibold rounded hover:bg-brandGreenHover transition">Подробнее</button>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ФОРМА ОБРАТНОЙ СВЯЗИ -->
-  <section id="callback" class="py-16 bg-gray-50">
-    <div class="max-w-xl mx-auto px-4 bg-white p-8 md:p-12 rounded-2xl card-shadow text-center">
-      <h2 class="text-2xl font-bold text-brandGreen mb-2">Закажите обратный звонок</h2>
-      <p class="text-xs text-gray-500 mb-8">Оставьте заявку в форме и наш менеджер свяжется с вами</p>
-      
-      <form onsubmit="handleCallback(event)" class="space-y-4">
-        <input type="text" placeholder="Ваше имя" required class="w-full px-4 py-3 border border-gray-200 rounded-lg text-sm focus:outline-none focus:border-brandGreen">
-        <input type="tel" placeholder="Ваш номер телефона" required class="w-full px-4 py-3 border border-gray-200 rounded-lg text-sm focus:outline-none focus:border-brandGreen">
-        <button type="submit" class="w-full bg-brandGreen hover:bg-brandGreenHover text-white font-bold py-3 rounded-lg shadow transition">Отправить</button>
-      </form>
-    </div>
-  </section>
-
-  <!-- ПОДВАЛ -->
-  <footer class="bg-gray-800 text-gray-300">
-    <div class="grid grid-cols-1 lg:grid-cols-2">
-      <!-- Карта -->
-      <div class="h-80 lg:h-auto bg-gray-700 relative flex items-center justify-center text-gray-400">
-        <iframe src="https://maps.google.com/maps?q=Kharkiv,%20Klochkivska%20St,%203&t=&z=13&ie=UTF8&iwloc=&output=embed" class="w-full h-full border-0" allowfullscreen="" loading="lazy"></iframe>
-      </div>
-
-      <!-- Контакты -->
-      <div class="p-8 lg:p-16 flex flex-col justify-between">
-        <div>
-          <div class="flex items-center gap-3 mb-6">
-            <div class="w-12 h-12 rounded-full bg-brandGreen text-white font-bold flex items-center justify-center text-sm">
-              ValMari
+            <div class="p-6 rounded-2xl bg-geassCard border border-geassRed/20 text-center hover:border-geassRed transition group">
+                <div class="text-4xl mb-3 group-hover:scale-110 transition">⚡</div>
+                <h3 class="font-bold text-white mb-1">JavaScript</h3>
+                <p class="text-xs text-gray-400">Интерактив и логика</p>
             </div>
-          </div>
-          <div class="text-2xl font-bold text-white mb-2">0 (800) 508-622</div>
-          <div class="text-sm text-gray-400 mb-8">Харьков, Клочковская, д. 3</div>
-
-          <div class="grid grid-cols-2 gap-4 text-xs text-gray-400 mb-8">
-            <a href="#courses" class="hover:text-white transition">Курсы обучения</a>
-            <a href="#promos" class="hover:text-white transition">Акции</a>
-            <a href="#webinars" class="hover:text-white transition">Вебинары</a>
-            <a href="#about" class="hover:text-white transition">О нас</a>
-            <a href="#videos" class="hover:text-white transition">Видео-уроки</a>
-            <a href="#about" class="hover:text-white transition">Блог</a>
-            <a href="#courses" class="hover:text-white transition">Прайс</a>
-            <a href="#callback" class="hover:text-white transition">Магазин</a>
-            <a href="#masterclasses" class="hover:text-white transition">Расписание</a>
-          </div>
-
-          <div class="flex gap-4 text-lg">
-            <a href="#" class="w-10 h-10 rounded-full bg-gray-700 flex items-center justify-center text-white hover:bg-brandGreen transition"><i class="fa-brands fa-facebook-f"></i></a>
-            <a href="#" class="w-10 h-10 rounded-full bg-gray-700 flex items-center justify-center text-white hover:bg-brandGreen transition"><i class="fa-brands fa-instagram"></i></a>
-          </div>
+            <div class="p-6 rounded-2xl bg-geassCard border border-geassRed/20 text-center hover:border-geassRed transition group">
+                <div class="text-4xl mb-3 group-hover:scale-110 transition">⚛️</div>
+                <h3 class="font-bold text-white mb-1">React.js</h3>
+                <p class="text-xs text-gray-400">Современные интерфейсы</p>
+            </div>
+            <div class="p-6 rounded-2xl bg-geassCard border border-geassRed/20 text-center hover:border-geassRed transition group">
+                <div class="text-4xl mb-3 group-hover:scale-110 transition">🚀</div>
+                <h3 class="font-bold text-white mb-1">Tailwind / Git</h3>
+                <p class="text-xs text-gray-400">Стили и контроль версий</p>
+            </div>
         </div>
+    </section>
 
-        <div class="text-xs text-gray-500 mt-12">
-          Политика конфиденциальности
+    <!-- PROJECTS SECTION -->
+    <section id="projects" class="py-24 bg-geassCard/30 border-t border-geassRed/10">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="text-center max-w-2xl mx-auto mb-16">
+                <span class="text-geassRed font-mono text-sm tracking-widest uppercase">ПОРТФОЛИО</span>
+                <h2 class="text-3xl sm:text-4xl font-extrabold text-white mt-2">Мои проекты</h2>
+                <p class="text-gray-400 text-sm mt-2">Все ранее созданные работы, доступные по живым ссылкам</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Project 1 -->
+                <div class="rounded-3xl bg-geassCard border border-geassRed/20 overflow-hidden flex flex-col justify-between hover:border-geassRed transition group">
+                    <div class="p-6">
+                        <span class="text-xs font-semibold px-3 py-1 rounded-full bg-geassRed/20 text-geassRed">WordPress / Обучение</span>
+                        <h3 class="text-xl font-bold text-white mt-4 mb-2">Курсы по WordPress</h3>
+                        <p class="text-gray-400 text-sm mb-6">Образовательная платформа и курсы по созданию сайтов.</p>
+                    </div>
+                    <div class="p-6 pt-0">
+                        <a href="https://lee-khaki.vercel.app/" target="_blank" class="w-full py-3 rounded-xl bg-geassRed/10 border border-geassRed/30 text-geassRed font-semibold text-sm flex items-center justify-center gap-2 group-hover:bg-geassRed group-hover:text-white transition">
+                            Открыть сайт <i class="fa-solid fa-arrow-right"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Project 2 -->
+                <div class="rounded-3xl bg-geassCard border border-geassRed/20 overflow-hidden flex flex-col justify-between hover:border-geassRed transition group">
+                    <div class="p-6">
+                        <span class="text-xs font-semibold px-3 py-1 rounded-full bg-geassRed/20 text-geassRed">Образование / Робототехника</span>
+                        <h3 class="text-xl font-bold text-white mt-4 mb-2">Школа робототехники / RunSmart</h3>
+                        <p class="text-gray-400 text-sm mb-6">Интерактивный сайт школы робототехники и тренировок.</p>
+                    </div>
+                    <div class="p-6 pt-0">
+                        <a href="https://robotschool.vercel.app/" target="_blank" class="w-full py-3 rounded-xl bg-geassRed/10 border border-geassRed/30 text-geassRed font-semibold text-sm flex items-center justify-center gap-2 group-hover:bg-geassRed group-hover:text-white transition">
+                            Открыть сайт <i class="fa-solid fa-arrow-right"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Project 3 -->
+                <div class="rounded-3xl bg-geassCard border border-geassRed/20 overflow-hidden flex flex-col justify-between hover:border-geassRed transition group">
+                    <div class="p-6">
+                        <span class="text-xs font-semibold px-3 py-1 rounded-full bg-geassRed/20 text-geassRed">Развлечения / Караоке</span>
+                        <h3 class="text-xl font-bold text-white mt-4 mb-2">Караоке-сайт XARIZMA</h3>
+                        <p class="text-gray-400 text-sm mb-6">Стильный развлекательный портал с залами и бронированием.</p>
+                    </div>
+                    <div class="p-6 pt-0">
+                        <a href="https://harizma.vercel.app/#halls" target="_blank" class="w-full py-3 rounded-xl bg-geassRed/10 border border-geassRed/30 text-geassRed font-semibold text-sm flex items-center justify-center gap-2 group-hover:bg-geassRed group-hover:text-white transition">
+                            Открыть сайт <i class="fa-solid fa-arrow-right"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Project 4 -->
+                <div class="rounded-3xl bg-geassCard border border-geassRed/20 overflow-hidden flex flex-col justify-between hover:border-geassRed transition group">
+                    <div class="p-6">
+                        <span class="text-xs font-semibold px-3 py-1 rounded-full bg-geassRed/20 text-geassRed">Ресторан / Еда</span>
+                        <h3 class="text-xl font-bold text-white mt-4 mb-2">«Дом Лучшей Еды»</h3>
+                        <p class="text-gray-400 text-sm mb-6">Уютный лендинг ресторана с меню и возможностью заказа.</p>
+                    </div>
+                    <div class="p-6 pt-0">
+                        <a href="https://leedeenadar.vercel.app/" target="_blank" class="w-full py-3 rounded-xl bg-geassRed/10 border border-geassRed/30 text-geassRed font-semibold text-sm flex items-center justify-center gap-2 group-hover:bg-geassRed group-hover:text-white transition">
+                            Открыть сайт <i class="fa-solid fa-arrow-right"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Project 5 -->
+                <div class="rounded-3xl bg-geassCard border border-geassRed/20 overflow-hidden flex flex-col justify-between hover:border-geassRed transition group">
+                    <div class="p-6">
+                        <span class="text-xs font-semibold px-3 py-1 rounded-full bg-geassRed/20 text-geassRed">Медицина / Косметология</span>
+                        <h3 class="text-xl font-bold text-white mt-4 mb-2">Учебный центр ValMari</h3>
+                        <p class="text-gray-400 text-sm mb-6">Профессиональный учебный центр эстетической косметологии.</p>
+                    </div>
+                    <div class="p-6 pt-0">
+                        <a href="https://karke.vercel.app/" target="_blank" class="w-full py-3 rounded-xl bg-geassRed/10 border border-geassRed/30 text-geassRed font-semibold text-sm flex items-center justify-center gap-2 group-hover:bg-geassRed group-hover:text-white transition">
+                            Открыть сайт <i class="fa-solid fa-arrow-right"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
         </div>
-      </div>
-    </div>
-  </footer>
+    </section>
 
-  <!-- МОДАЛЬНОЕ ОКНО -->
-  <div id="modal" class="fixed inset-0 bg-black/60 z-50 hidden flex items-center justify-center p-4">
-    <div class="bg-white rounded-2xl max-w-md w-full p-8 relative shadow-2xl">
-      <button onclick="closeModal()" class="absolute top-4 right-4 text-gray-400 hover:text-gray-600 text-xl">&times;</button>
-      <h3 id="modalTitle" class="text-xl font-bold text-brandGreen mb-2">Запись на курс</h3>
-      <p class="text-xs text-gray-500 mb-6">Оставьте контакты и наш администратор свяжется с вами</p>
-      
-      <form onsubmit="handleModalSubmit(event)" class="space-y-4">
-        <input type="text" placeholder="Ваше имя" required class="w-full px-4 py-3 border border-gray-200 rounded-lg text-sm focus:outline-none focus:border-brandGreen">
-        <input type="tel" placeholder="Номер телефона" required class="w-full px-4 py-3 border border-gray-200 rounded-lg text-sm focus:outline-none focus:border-brandGreen">
-        <button type="submit" class="w-full bg-brandGreen hover:bg-brandGreenHover text-white font-bold py-3 rounded-lg transition">Записаться</button>
-      </form>
-    </div>
-  </div>
+    <!-- CONTACT SECTION -->
+    <section id="contact" class="py-24 max-w-xl mx-auto px-6">
+        <div class="bg-geassCard p-8 sm:p-12 rounded-3xl border border-geassRed/30 shadow-2xl relative">
+            <div class="text-center mb-8">
+                <span class="text-geassRed font-mono text-sm tracking-widest uppercase">КОНТАКТЫ</span>
+                <h2 class="text-3xl font-extrabold text-white mt-2">Свяжитесь со мной</h2>
+                <p class="text-gray-400 text-xs mt-1">Оставьте заявку и я отвечу вам в ближайшее время</p>
+            </div>
 
-  <script>
-    const mobileBtn = document.getElementById('mobileMenuBtn');
-    const mainNav = document.getElementById('mainNav');
-    mobileBtn.addEventListener('click', () => {
-      mainNav.classList.toggle('hidden');
-    });
+            <form onsubmit="alert('Заявка успешно отправлена!'); event.preventDefault();" class="space-y-4">
+                <div>
+                    <input type="text" placeholder="Ваше имя" required class="w-full px-4 py-3 rounded-xl bg-geassDark border border-geassRed/30 text-white placeholder-gray-500 focus:outline-none focus:border-geassRed">
+                </div>
+                <div>
+                    <input type="tel" placeholder="Номер телефона" required class="w-full px-4 py-3 rounded-xl bg-geassDark border border-geassRed/30 text-white placeholder-gray-500 focus:outline-none focus:border-geassRed">
+                </div>
+                <div>
+                    <textarea placeholder="Ваше сообщение" rows="4" class="w-full px-4 py-3 rounded-xl bg-geassDark border border-geassRed/30 text-white placeholder-gray-500 focus:outline-none focus:border-geassRed"></textarea>
+                </div>
+                <button type="submit" class="w-full py-4 rounded-xl bg-geassRed text-white font-bold shadow-lg shadow-geassRed/40 hover:bg-red-600 transition">
+                    Отправить заявку
+                </button>
+            </form>
+        </div>
+    </section>
 
-    function openModal(title) {
-      document.getElementById('modalTitle').textContent = title;
-      document.getElementById('modal').classList.remove('hidden');
-    }
+    <!-- FOOTER -->
+    <footer class="py-8 border-t border-geassRed/20 text-center text-xs text-gray-500">
+        <p>&copy; 2026 Елдос. Все права защищены. Code Geass Aesthetic.</p>
+    </footer>
 
-    function closeModal() {
-      document.getElementById('modal').classList.add('hidden');
-    }
-
-    function handleCallback(e) {
-      e.preventDefault();
-      alert('Спасибо! Мы свяжемся с вами в ближайшее время.');
-      e.target.reset();
-    }
-
-    function handleModalSubmit(e) {
-      e.preventDefault();
-      alert('Заявка успешно отправлена!');
-      closeModal();
-      e.target.reset();
-    }
-  </script>
 </body>
 </html>
